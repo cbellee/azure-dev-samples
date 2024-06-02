@@ -1,0 +1,17 @@
+[
+    {
+        "customerId": "a2453222-25c2-46c6-9fa3-1a9f5aea1754",
+        "flightId": "2c17f61d-bd46-43f2-9eb4-7250a92587c1",
+        "date": "2024-05-20T06:37:12Z"
+    },
+    {
+        "customerId": "1220e8b5-dc72-46fa-ae6a-09d978a1f67c",
+        "flightId": "1220e8b5-dc72-46fa-ae6a-09d978a1f67c",
+        "date": "2024-05-20T03:00:12Z"
+    },
+    {
+        "customerId": "0b649bac-597b-4791-bcab-e78fe531f757",
+        "flightId": "eee856c9-43c9-486c-97aa-39c95d33ba63",
+        "date": "2024-05-20T07:23:04Z"
+    }
+]

@@ -1,0 +1,1000 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {},
+    "variables": {},
+    "resources": [
+        {
+            "type": "Microsoft.ApiManagement/service",
+            "apiVersion": "2023-05-01-preview",
+            "name": "apim-dev-p5at4gx2mnw7y",
+            "location": "Australia East",
+            "sku": {
+                "name": "Consumption",
+                "capacity": 0
+            },
+            "identity": {
+                "type": "SystemAssigned"
+            },
+            "properties": {
+                "publisherEmail": "cbellee@kainiindustries.net",
+                "publisherName": "cbellee@kainiindustries.net",
+                "notificationSenderEmail": "apimgmt-noreply@mail.windowsazure.com",
+                "hostnameConfigurations": [
+                    {
+                        "type": "Proxy",
+                        "hostName": "apim-dev-p5at4gx2mnw7y.azure-api.net",
+                        "negotiateClientCertificate": false,
+                        "defaultSslBinding": true,
+                        "certificateSource": "BuiltIn"
+                    }
+                ],
+                "customProperties": {
+                    "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Tls10": "False",
+                    "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Tls11": "False",
+                    "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Tls10": "False",
+                    "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Tls11": "False",
+                    "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Ssl30": "False",
+                    "Microsoft.WindowsAzure.ApiManagement.Gateway.Protocols.Server.Http2": "False"
+                },
+                "virtualNetworkType": "None",
+                "disableGateway": false,
+                "natGatewayState": "Unsupported",
+                "apiVersionConstraint": {},
+                "publicNetworkAccess": "Enabled",
+                "legacyPortalStatus": "Enabled",
+                "developerPortalStatus": "Enabled"
+            }
+        },
+        {
+            "type": "Microsoft.ApiManagement/service/apis",
+            "apiVersion": "2023-05-01-preview",
+            "name": "apim-dev-p5at4gx2mnw7y/booking-api",
+            "dependsOn": [
+                "[resourceId('Microsoft.ApiManagement/service', 'apim-dev-p5at4gx2mnw7y')]"
+            ],
+            "properties": {
+                "displayName": "Booking API",
+                "apiRevision": "1",
+                "subscriptionRequired": false,
+                "serviceUrl": "https://booking.gentleplant-d284a82a.australiaeast.azurecontainerapps.io",
+                "path": "booking-api",
+                "protocols": [
+                    "http",
+                    "https"
+                ],
+                "authenticationSettings": {
+                    "oAuth2AuthenticationSettings": [],
+                    "openidAuthenticationSettings": []
+                },
+                "subscriptionKeyParameterNames": {
+                    "header": "Ocp-Apim-Subscription-Key",
+                    "query": "subscription-key"
+                },
+                "isCurrent": true
+            }
+        },
+        {
+            "type": "Microsoft.ApiManagement/service/apis",
+            "apiVersion": "2023-05-01-preview",
+            "name": "apim-dev-p5at4gx2mnw7y/customer-api",
+            "dependsOn": [
+                "[resourceId('Microsoft.ApiManagement/service', 'apim-dev-p5at4gx2mnw7y')]"
+            ],
+            "properties": {
+                "displayName": "Customer API",
+                "apiRevision": "1",
+                "subscriptionRequired": false,
+                "serviceUrl": "https://customer.gentleplant-d284a82a.australiaeast.azurecontainerapps.io",
+                "path": "customer-api",
+                "protocols": [
+                    "http",
+                    "https"
+                ],
+                "authenticationSettings": {
+                    "oAuth2AuthenticationSettings": [],
+                    "openidAuthenticationSettings": []
+                },
+                "subscriptionKeyParameterNames": {
+                    "header": "Ocp-Apim-Subscription-Key",
+                    "query": "subscription-key"
+                },
+                "isCurrent": true
+            }
+        },
+        {
+            "type": "Microsoft.ApiManagement/service/apis",
+            "apiVersion": "2023-05-01-preview",
+            "name": "apim-dev-p5at4gx2mnw7y/flight-api",
+            "dependsOn": [
+                "[resourceId('Microsoft.ApiManagement/service', 'apim-dev-p5at4gx2mnw7y')]"
+            ],
+            "properties": {
+                "displayName": "Flight API",
+                "apiRevision": "1",
+                "subscriptionRequired": false,
+                "serviceUrl": "https://flight.gentleplant-d284a82a.australiaeast.azurecontainerapps.io",
+                "path": "flight-api",
+                "protocols": [
+                    "http",
+                    "https"
+                ],
+                "authenticationSettings": {
+                    "oAuth2AuthenticationSettings": [],
+                    "openidAuthenticationSettings": []
+                },
+                "subscriptionKeyParameterNames": {
+                    "header": "Ocp-Apim-Subscription-Key",
+                    "query": "subscription-key"
+                },
+                "isCurrent": true
+            }
+        },
+        {
+            "type": "Microsoft.ApiManagement/service/policies",
+            "apiVersion": "2023-05-01-preview",
+            "name": "apim-dev-p5at4gx2mnw7y/policy",
+            "dependsOn": [
+                "[resourceId('Microsoft.ApiManagement/service', 'apim-dev-p5at4gx2mnw7y')]"
+            ],
+            "properties": {
+                "value": "<!--\r\n    IMPORTANT:\r\n    - Policy elements can appear only within the <inbound>, <outbound>, <backend> section elements.\r\n    - Only the <forward-request> policy element can appear within the <backend> section element.\r\n    - To apply a policy to the incoming request (before it is forwarded to the backend service), place a corresponding policy element within the <inbound> section element.\r\n    - To apply a policy to the outgoing response (before it is sent back to the caller), place a corresponding policy element within the <outbound> section element.\r\n    - To add a policy position the cursor at the desired insertion point and click on the round button associated with the policy.\r\n    - To remove a policy, delete the corresponding policy statement from the policy document.\r\n    - Policies are applied in the order of their appearance, from the top down.\r\n-->\r\n<policies>\r\n  <inbound></inbound>\r\n  <backend>\r\n    <forward-request />\r\n  </backend>\r\n  <outbound></outbound>\r\n</policies>",
+                "format": "xml"
+            }
+        },
+        {
+            "type": "Microsoft.ApiManagement/service/subscriptions",
+            "apiVersion": "2023-05-01-preview",
+            "name": "apim-dev-p5at4gx2mnw7y/master",
+            "dependsOn": [
+                "[resourceId('Microsoft.ApiManagement/service', 'apim-dev-p5at4gx2mnw7y')]"
+            ],
+            "properties": {
+                "scope": "[concat(resourceId('Microsoft.ApiManagement/service', 'apim-dev-p5at4gx2mnw7y'), '/')]",
+                "displayName": "Built-in all-access subscription",
+                "state": "active",
+                "allowTracing": false
+            }
+        },
+        {
+            "type": "Microsoft.ApiManagement/service/apis/operations",
+            "apiVersion": "2023-05-01-preview",
+            "name": "apim-dev-p5at4gx2mnw7y/booking-api/delete-booking-id",
+            "dependsOn": [
+                "[resourceId('Microsoft.ApiManagement/service/apis', 'apim-dev-p5at4gx2mnw7y', 'booking-api')]",
+                "[resourceId('Microsoft.ApiManagement/service', 'apim-dev-p5at4gx2mnw7y')]"
+            ],
+            "properties": {
+                "displayName": "Delete a booking by ID",
+                "method": "DELETE",
+                "urlTemplate": "/booking/{id}",
+                "templateParameters": [
+                    {
+                        "name": "id",
+                        "type": "string",
+                        "required": true,
+                        "values": [],
+                        "schemaId": "6653c650313e2f11289ff41a",
+                        "typeName": "Booking-id-DeleteRequest"
+                    }
+                ],
+                "description": "Delete a booking by ID",
+                "responses": [
+                    {
+                        "statusCode": 204,
+                        "description": "Booking deleted",
+                        "representations": [],
+                        "headers": []
+                    },
+                    {
+                        "statusCode": 404,
+                        "description": "Booking not found",
+                        "representations": [],
+                        "headers": []
+                    },
+                    {
+                        "statusCode": 500,
+                        "description": "Unable to delete booking",
+                        "representations": [],
+                        "headers": []
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Microsoft.ApiManagement/service/apis/operations",
+            "apiVersion": "2023-05-01-preview",
+            "name": "apim-dev-p5at4gx2mnw7y/booking-api/get-booking-flightnumber-flightnumber-customerid-customerid",
+            "dependsOn": [
+                "[resourceId('Microsoft.ApiManagement/service/apis', 'apim-dev-p5at4gx2mnw7y', 'booking-api')]",
+                "[resourceId('Microsoft.ApiManagement/service', 'apim-dev-p5at4gx2mnw7y')]"
+            ],
+            "properties": {
+                "displayName": "Get a booking by flight number and customer ID",
+                "method": "GET",
+                "urlTemplate": "/booking?flightNumber={flightNumber}&customerId={customerId}",
+                "templateParameters": [
+                    {
+                        "name": "flightNumber",
+                        "type": "string",
+                        "required": true,
+                        "values": [],
+                        "schemaId": "6653c650313e2f11289ff41a",
+                        "typeName": "BookingGetRequest"
+                    },
+                    {
+                        "name": "customerId",
+                        "type": "string",
+                        "required": true,
+                        "values": [],
+                        "schemaId": "6653c650313e2f11289ff41a",
+                        "typeName": "BookingGetRequest-1"
+                    }
+                ],
+                "description": "Get a booking by flight number and customer ID",
+                "responses": [
+                    {
+                        "statusCode": 200,
+                        "description": "Booking details",
+                        "representations": [
+                            {
+                                "contentType": "application/json",
+                                "examples": {
+                                    "default": {
+                                        "value": {
+                                            "id": "string",
+                                            "flightId": "string",
+                                            "customerId": "string",
+                                            "date": "string"
+                                        }
+                                    }
+                                },
+                                "schemaId": "6653c650313e2f11289ff41a",
+                                "typeName": "Booking"
+                            }
+                        ],
+                        "headers": []
+                    },
+                    {
+                        "statusCode": 404,
+                        "description": "Booking not found",
+                        "representations": [],
+                        "headers": []
+                    },
+                    {
+                        "statusCode": 500,
+                        "description": "Unable to retrieve booking",
+                        "representations": [],
+                        "headers": []
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Microsoft.ApiManagement/service/apis/operations",
+            "apiVersion": "2023-05-01-preview",
+            "name": "apim-dev-p5at4gx2mnw7y/booking-api/get-booking-id",
+            "dependsOn": [
+                "[resourceId('Microsoft.ApiManagement/service/apis', 'apim-dev-p5at4gx2mnw7y', 'booking-api')]",
+                "[resourceId('Microsoft.ApiManagement/service', 'apim-dev-p5at4gx2mnw7y')]"
+            ],
+            "properties": {
+                "displayName": "Get a booking by ID",
+                "method": "GET",
+                "urlTemplate": "/booking/{id}",
+                "templateParameters": [
+                    {
+                        "name": "id",
+                        "type": "string",
+                        "required": true,
+                        "values": [],
+                        "schemaId": "6653c650313e2f11289ff41a",
+                        "typeName": "Booking-id-GetRequest"
+                    }
+                ],
+                "description": "Get a booking by ID",
+                "responses": [
+                    {
+                        "statusCode": 200,
+                        "description": "Booking details",
+                        "representations": [
+                            {
+                                "contentType": "application/json",
+                                "examples": {
+                                    "default": {
+                                        "value": {
+                                            "id": "string",
+                                            "flightId": "string",
+                                            "customerId": "string",
+                                            "date": "string"
+                                        }
+                                    }
+                                },
+                                "schemaId": "6653c650313e2f11289ff41a",
+                                "typeName": "Booking"
+                            }
+                        ],
+                        "headers": []
+                    },
+                    {
+                        "statusCode": 404,
+                        "description": "Booking not found",
+                        "representations": [],
+                        "headers": []
+                    },
+                    {
+                        "statusCode": 500,
+                        "description": "Unable to retrieve booking",
+                        "representations": [],
+                        "headers": []
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Microsoft.ApiManagement/service/apis/operations",
+            "apiVersion": "2023-05-01-preview",
+            "name": "apim-dev-p5at4gx2mnw7y/booking-api/get-bookings",
+            "dependsOn": [
+                "[resourceId('Microsoft.ApiManagement/service/apis', 'apim-dev-p5at4gx2mnw7y', 'booking-api')]",
+                "[resourceId('Microsoft.ApiManagement/service', 'apim-dev-p5at4gx2mnw7y')]"
+            ],
+            "properties": {
+                "displayName": "Get all bookings",
+                "method": "GET",
+                "urlTemplate": "/bookings",
+                "templateParameters": [],
+                "description": "Get all bookings",
+                "responses": [
+                    {
+                        "statusCode": 200,
+                        "description": "A list of bookings",
+                        "representations": [
+                            {
+                                "contentType": "application/json",
+                                "examples": {
+                                    "default": {
+                                        "value": [
+                                            {
+                                                "id": "string",
+                                                "flightId": "string",
+                                                "customerId": "string",
+                                                "date": "string"
+                                            }
+                                        ]
+                                    }
+                                },
+                                "schemaId": "6653c650313e2f11289ff41a",
+                                "typeName": "BookingsGet200ApplicationJsonResponse"
+                            }
+                        ],
+                        "headers": []
+                    },
+                    {
+                        "statusCode": 500,
+                        "description": "Unable to retrieve bookings",
+                        "representations": [],
+                        "headers": []
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Microsoft.ApiManagement/service/apis/operations",
+            "apiVersion": "2023-05-01-preview",
+            "name": "apim-dev-p5at4gx2mnw7y/booking-api/post-bookings",
+            "dependsOn": [
+                "[resourceId('Microsoft.ApiManagement/service/apis', 'apim-dev-p5at4gx2mnw7y', 'booking-api')]",
+                "[resourceId('Microsoft.ApiManagement/service', 'apim-dev-p5at4gx2mnw7y')]"
+            ],
+            "properties": {
+                "displayName": "Create a new booking",
+                "method": "POST",
+                "urlTemplate": "/bookings",
+                "templateParameters": [],
+                "description": "Create a new booking",
+                "request": {
+                    "queryParameters": [],
+                    "headers": [],
+                    "representations": [
+                        {
+                            "contentType": "application/json",
+                            "examples": {
+                                "default": {
+                                    "value": {
+                                        "id": "string",
+                                        "flightId": "string",
+                                        "customerId": "string",
+                                        "date": "string"
+                                    }
+                                }
+                            },
+                            "schemaId": "6653c650313e2f11289ff41a",
+                            "typeName": "Booking"
+                        }
+                    ]
+                },
+                "responses": [
+                    {
+                        "statusCode": 201,
+                        "description": "Booking created",
+                        "representations": [],
+                        "headers": []
+                    },
+                    {
+                        "statusCode": 400,
+                        "description": "Invalid input",
+                        "representations": [],
+                        "headers": []
+                    },
+                    {
+                        "statusCode": 500,
+                        "description": "Unable to create booking",
+                        "representations": [],
+                        "headers": []
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Microsoft.ApiManagement/service/apis/operations",
+            "apiVersion": "2023-05-01-preview",
+            "name": "apim-dev-p5at4gx2mnw7y/customer-api/delete-customer-id",
+            "dependsOn": [
+                "[resourceId('Microsoft.ApiManagement/service/apis', 'apim-dev-p5at4gx2mnw7y', 'customer-api')]",
+                "[resourceId('Microsoft.ApiManagement/service', 'apim-dev-p5at4gx2mnw7y')]"
+            ],
+            "properties": {
+                "displayName": "Delete a customer by ID",
+                "method": "DELETE",
+                "urlTemplate": "/customer/{id}",
+                "templateParameters": [
+                    {
+                        "name": "id",
+                        "type": "string",
+                        "required": true,
+                        "values": [],
+                        "schemaId": "6653c683733e33056ccbe117",
+                        "typeName": "Customer-id-DeleteRequest"
+                    }
+                ],
+                "description": "Delete a customer by ID",
+                "responses": [
+                    {
+                        "statusCode": 204,
+                        "description": "Customer deleted",
+                        "representations": [],
+                        "headers": []
+                    },
+                    {
+                        "statusCode": 404,
+                        "description": "Customer not found",
+                        "representations": [],
+                        "headers": []
+                    },
+                    {
+                        "statusCode": 500,
+                        "description": "Unable to delete customer",
+                        "representations": [],
+                        "headers": []
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Microsoft.ApiManagement/service/apis/operations",
+            "apiVersion": "2023-05-01-preview",
+            "name": "apim-dev-p5at4gx2mnw7y/customer-api/get-customer-id",
+            "dependsOn": [
+                "[resourceId('Microsoft.ApiManagement/service/apis', 'apim-dev-p5at4gx2mnw7y', 'customer-api')]",
+                "[resourceId('Microsoft.ApiManagement/service', 'apim-dev-p5at4gx2mnw7y')]"
+            ],
+            "properties": {
+                "displayName": "Get a customer by ID",
+                "method": "GET",
+                "urlTemplate": "/customer/{id}",
+                "templateParameters": [
+                    {
+                        "name": "id",
+                        "type": "string",
+                        "required": true,
+                        "values": [],
+                        "schemaId": "6653c683733e33056ccbe117",
+                        "typeName": "Customer-id-GetRequest"
+                    }
+                ],
+                "description": "Get a customer by ID",
+                "responses": [
+                    {
+                        "statusCode": 200,
+                        "description": "Customer details",
+                        "representations": [
+                            {
+                                "contentType": "application/json",
+                                "examples": {
+                                    "default": {
+                                        "value": {
+                                            "id": "string",
+                                            "firstName": "string",
+                                            "lastName": "string",
+                                            "streetAddress": "string",
+                                            "city": "string",
+                                            "state": "string",
+                                            "zip": "string",
+                                            "country": "string"
+                                        }
+                                    }
+                                },
+                                "schemaId": "6653c683733e33056ccbe117",
+                                "typeName": "Customer"
+                            }
+                        ],
+                        "headers": []
+                    },
+                    {
+                        "statusCode": 404,
+                        "description": "Customer not found",
+                        "representations": [],
+                        "headers": []
+                    },
+                    {
+                        "statusCode": 500,
+                        "description": "Unable to retrieve customer",
+                        "representations": [],
+                        "headers": []
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Microsoft.ApiManagement/service/apis/operations",
+            "apiVersion": "2023-05-01-preview",
+            "name": "apim-dev-p5at4gx2mnw7y/customer-api/get-customers",
+            "dependsOn": [
+                "[resourceId('Microsoft.ApiManagement/service/apis', 'apim-dev-p5at4gx2mnw7y', 'customer-api')]",
+                "[resourceId('Microsoft.ApiManagement/service', 'apim-dev-p5at4gx2mnw7y')]"
+            ],
+            "properties": {
+                "displayName": "Get all customers",
+                "method": "GET",
+                "urlTemplate": "/customers",
+                "templateParameters": [],
+                "description": "Get all customers",
+                "responses": [
+                    {
+                        "statusCode": 200,
+                        "description": "A list of customers",
+                        "representations": [
+                            {
+                                "contentType": "application/json",
+                                "examples": {
+                                    "default": {
+                                        "value": [
+                                            {
+                                                "id": "string",
+                                                "firstName": "string",
+                                                "lastName": "string",
+                                                "streetAddress": "string",
+                                                "city": "string",
+                                                "state": "string",
+                                                "zip": "string",
+                                                "country": "string"
+                                            }
+                                        ]
+                                    }
+                                },
+                                "schemaId": "6653c683733e33056ccbe117",
+                                "typeName": "CustomersGet200ApplicationJsonResponse"
+                            }
+                        ],
+                        "headers": []
+                    },
+                    {
+                        "statusCode": 500,
+                        "description": "Unable to retrieve customers",
+                        "representations": [],
+                        "headers": []
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Microsoft.ApiManagement/service/apis/operations",
+            "apiVersion": "2023-05-01-preview",
+            "name": "apim-dev-p5at4gx2mnw7y/customer-api/post-customers",
+            "dependsOn": [
+                "[resourceId('Microsoft.ApiManagement/service/apis', 'apim-dev-p5at4gx2mnw7y', 'customer-api')]",
+                "[resourceId('Microsoft.ApiManagement/service', 'apim-dev-p5at4gx2mnw7y')]"
+            ],
+            "properties": {
+                "displayName": "Create a new customer",
+                "method": "POST",
+                "urlTemplate": "/customers",
+                "templateParameters": [],
+                "description": "Create a new customer",
+                "request": {
+                    "queryParameters": [],
+                    "headers": [],
+                    "representations": [
+                        {
+                            "contentType": "application/json",
+                            "examples": {
+                                "default": {
+                                    "value": {
+                                        "id": "string",
+                                        "firstName": "string",
+                                        "lastName": "string",
+                                        "streetAddress": "string",
+                                        "city": "string",
+                                        "state": "string",
+                                        "zip": "string",
+                                        "country": "string"
+                                    }
+                                }
+                            },
+                            "schemaId": "6653c683733e33056ccbe117",
+                            "typeName": "Customer"
+                        }
+                    ]
+                },
+                "responses": [
+                    {
+                        "statusCode": 201,
+                        "description": "Customer created",
+                        "representations": [],
+                        "headers": []
+                    },
+                    {
+                        "statusCode": 400,
+                        "description": "Invalid input",
+                        "representations": [],
+                        "headers": []
+                    },
+                    {
+                        "statusCode": 500,
+                        "description": "Unable to create customer",
+                        "representations": [],
+                        "headers": []
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Microsoft.ApiManagement/service/apis/operations",
+            "apiVersion": "2023-05-01-preview",
+            "name": "apim-dev-p5at4gx2mnw7y/flight-api/delete-flight-id",
+            "dependsOn": [
+                "[resourceId('Microsoft.ApiManagement/service/apis', 'apim-dev-p5at4gx2mnw7y', 'flight-api')]",
+                "[resourceId('Microsoft.ApiManagement/service', 'apim-dev-p5at4gx2mnw7y')]"
+            ],
+            "properties": {
+                "displayName": "Delete a flight by ID",
+                "method": "DELETE",
+                "urlTemplate": "/flight/{id}",
+                "templateParameters": [
+                    {
+                        "name": "id",
+                        "type": "string",
+                        "required": true,
+                        "values": [],
+                        "schemaId": "6653c6adfffee31fdc79683e",
+                        "typeName": "Flight-id-DeleteRequest"
+                    }
+                ],
+                "description": "Delete a flight by ID",
+                "responses": [
+                    {
+                        "statusCode": 204,
+                        "description": "Flight deleted",
+                        "representations": [],
+                        "headers": []
+                    },
+                    {
+                        "statusCode": 404,
+                        "description": "Flight not found",
+                        "representations": [],
+                        "headers": []
+                    },
+                    {
+                        "statusCode": 500,
+                        "description": "Unable to delete flight",
+                        "representations": [],
+                        "headers": []
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Microsoft.ApiManagement/service/apis/operations",
+            "apiVersion": "2023-05-01-preview",
+            "name": "apim-dev-p5at4gx2mnw7y/flight-api/get-flight-id",
+            "dependsOn": [
+                "[resourceId('Microsoft.ApiManagement/service/apis', 'apim-dev-p5at4gx2mnw7y', 'flight-api')]",
+                "[resourceId('Microsoft.ApiManagement/service', 'apim-dev-p5at4gx2mnw7y')]"
+            ],
+            "properties": {
+                "displayName": "Get a flight by ID",
+                "method": "GET",
+                "urlTemplate": "/flight/{id}",
+                "templateParameters": [
+                    {
+                        "name": "id",
+                        "type": "string",
+                        "required": true,
+                        "values": [],
+                        "schemaId": "6653c6adfffee31fdc79683e",
+                        "typeName": "Flight-id-GetRequest"
+                    }
+                ],
+                "description": "Get a flight by ID",
+                "responses": [
+                    {
+                        "statusCode": 200,
+                        "description": "Flight details",
+                        "representations": [
+                            {
+                                "contentType": "application/json",
+                                "examples": {
+                                    "default": {
+                                        "value": {
+                                            "id": "string",
+                                            "flightNumber": "string",
+                                            "carrier": "string",
+                                            "origin": "string",
+                                            "destination": "string",
+                                            "departure": "string",
+                                            "arrival": "string",
+                                            "price": 0
+                                        }
+                                    }
+                                },
+                                "schemaId": "6653c6adfffee31fdc79683e",
+                                "typeName": "Flight"
+                            }
+                        ],
+                        "headers": []
+                    },
+                    {
+                        "statusCode": 404,
+                        "description": "Flight not found",
+                        "representations": [],
+                        "headers": []
+                    },
+                    {
+                        "statusCode": 500,
+                        "description": "Unable to retrieve flight",
+                        "representations": [],
+                        "headers": []
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Microsoft.ApiManagement/service/apis/operations",
+            "apiVersion": "2023-05-01-preview",
+            "name": "apim-dev-p5at4gx2mnw7y/flight-api/get-flights",
+            "dependsOn": [
+                "[resourceId('Microsoft.ApiManagement/service/apis', 'apim-dev-p5at4gx2mnw7y', 'flight-api')]",
+                "[resourceId('Microsoft.ApiManagement/service', 'apim-dev-p5at4gx2mnw7y')]"
+            ],
+            "properties": {
+                "displayName": "Get all flights",
+                "method": "GET",
+                "urlTemplate": "/flights",
+                "templateParameters": [],
+                "description": "Get all flights",
+                "responses": [
+                    {
+                        "statusCode": 200,
+                        "description": "A list of flights",
+                        "representations": [
+                            {
+                                "contentType": "application/json",
+                                "examples": {
+                                    "default": {
+                                        "value": [
+                                            {
+                                                "id": "string",
+                                                "flightNumber": "string",
+                                                "carrier": "string",
+                                                "origin": "string",
+                                                "destination": "string",
+                                                "departure": "string",
+                                                "arrival": "string",
+                                                "price": 0
+                                            }
+                                        ]
+                                    }
+                                },
+                                "schemaId": "6653c6adfffee31fdc79683e",
+                                "typeName": "FlightsGet200ApplicationJsonResponse"
+                            }
+                        ],
+                        "headers": []
+                    },
+                    {
+                        "statusCode": 500,
+                        "description": "Unable to retrieve flights",
+                        "representations": [],
+                        "headers": []
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Microsoft.ApiManagement/service/apis/operations",
+            "apiVersion": "2023-05-01-preview",
+            "name": "apim-dev-p5at4gx2mnw7y/flight-api/post-flights",
+            "dependsOn": [
+                "[resourceId('Microsoft.ApiManagement/service/apis', 'apim-dev-p5at4gx2mnw7y', 'flight-api')]",
+                "[resourceId('Microsoft.ApiManagement/service', 'apim-dev-p5at4gx2mnw7y')]"
+            ],
+            "properties": {
+                "displayName": "Create a new flight",
+                "method": "POST",
+                "urlTemplate": "/flights",
+                "templateParameters": [],
+                "description": "Create a new flight",
+                "request": {
+                    "queryParameters": [],
+                    "headers": [],
+                    "representations": [
+                        {
+                            "contentType": "application/json",
+                            "examples": {
+                                "default": {
+                                    "value": {
+                                        "id": "string",
+                                        "flightNumber": "string",
+                                        "carrier": "string",
+                                        "origin": "string",
+                                        "destination": "string",
+                                        "departure": "string",
+                                        "arrival": "string",
+                                        "price": 0
+                                    }
+                                }
+                            },
+                            "schemaId": "6653c6adfffee31fdc79683e",
+                            "typeName": "Flight"
+                        }
+                    ]
+                },
+                "responses": [
+                    {
+                        "statusCode": 201,
+                        "description": "Flight created",
+                        "representations": [],
+                        "headers": []
+                    },
+                    {
+                        "statusCode": 400,
+                        "description": "Invalid input",
+                        "representations": [],
+                        "headers": []
+                    },
+                    {
+                        "statusCode": 500,
+                        "description": "Unable to create flight",
+                        "representations": [],
+                        "headers": []
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Microsoft.ApiManagement/service/apis/policies",
+            "apiVersion": "2023-05-01-preview",
+            "name": "apim-dev-p5at4gx2mnw7y/booking-api/policy",
+            "dependsOn": [
+                "[resourceId('Microsoft.ApiManagement/service/apis', 'apim-dev-p5at4gx2mnw7y', 'booking-api')]",
+                "[resourceId('Microsoft.ApiManagement/service', 'apim-dev-p5at4gx2mnw7y')]"
+            ],
+            "properties": {
+                "value": "<!--\r\n    - Policies are applied in the order they appear.\r\n    - Position <base/> inside a section to inherit policies from the outer scope.\r\n    - Comments within policies are not preserved.\r\n-->\r\n<!-- Add policies as children to the <inbound>, <outbound>, <backend>, and <on-error> elements -->\r\n<policies>\r\n  <!-- Throttle, authorize, validate, cache, or transform the requests -->\r\n  <inbound>\r\n    <validate-jwt header-name=\"Authorization\" failed-validation-httpcode=\"401\" failed-validation-error-message=\"Unauthorized. Access token is missing or invalid.\">\r\n      <openid-config url=\"https://login.microsoftonline.com/kainiindustries.net/.well-known/openid-configuration\" />\r\n      <audiences>\r\n        <audience>a39ecde7-73e9-4866-a016-88e28952cefd</audience>\r\n      </audiences>\r\n      <required-claims>\r\n        <claim name=\"roles\" match=\"all\">\r\n          <value>booking.read</value>\r\n          <value>booking.write</value>\r\n        </claim>\r\n      </required-claims>\r\n    </validate-jwt>\r\n    <base />\r\n  </inbound>\r\n  <!-- Control if and how the requests are forwarded to services  -->\r\n  <backend>\r\n    <base />\r\n  </backend>\r\n  <!-- Customize the responses -->\r\n  <outbound>\r\n    <base />\r\n  </outbound>\r\n  <!-- Handle exceptions and customize error responses  -->\r\n  <on-error>\r\n    <base />\r\n  </on-error>\r\n</policies>",
+                "format": "xml"
+            }
+        },
+        {
+            "type": "Microsoft.ApiManagement/service/apis/policies",
+            "apiVersion": "2023-05-01-preview",
+            "name": "apim-dev-p5at4gx2mnw7y/customer-api/policy",
+            "dependsOn": [
+                "[resourceId('Microsoft.ApiManagement/service/apis', 'apim-dev-p5at4gx2mnw7y', 'customer-api')]",
+                "[resourceId('Microsoft.ApiManagement/service', 'apim-dev-p5at4gx2mnw7y')]"
+            ],
+            "properties": {
+                "value": "<!--\r\n    - Policies are applied in the order they appear.\r\n    - Position <base/> inside a section to inherit policies from the outer scope.\r\n    - Comments within policies are not preserved.\r\n-->\r\n<!-- Add policies as children to the <inbound>, <outbound>, <backend>, and <on-error> elements -->\r\n<policies>\r\n  <!-- Throttle, authorize, validate, cache, or transform the requests -->\r\n  <inbound>\r\n    <validate-jwt header-name=\"Authorization\" failed-validation-httpcode=\"401\" failed-validation-error-message=\"Unauthorized. Access token is missing or invalid.\">\r\n      <openid-config url=\"https://login.microsoftonline.com/kainiindustries.net/.well-known/openid-configuration\" />\r\n      <audiences>\r\n        <audience>a39ecde7-73e9-4866-a016-88e28952cefd</audience>\r\n      </audiences>\r\n      <required-claims>\r\n        <claim name=\"roles\" match=\"all\">\r\n          <value>customer.read</value>\r\n          <value>customer.write</value>\r\n        </claim>\r\n      </required-claims>\r\n    </validate-jwt>\r\n    <base />\r\n  </inbound>\r\n  <!-- Control if and how the requests are forwarded to services  -->\r\n  <backend>\r\n    <base />\r\n  </backend>\r\n  <!-- Customize the responses -->\r\n  <outbound>\r\n    <base />\r\n  </outbound>\r\n  <!-- Handle exceptions and customize error responses  -->\r\n  <on-error>\r\n    <base />\r\n  </on-error>\r\n</policies>",
+                "format": "xml"
+            }
+        },
+        {
+            "type": "Microsoft.ApiManagement/service/apis/policies",
+            "apiVersion": "2023-05-01-preview",
+            "name": "apim-dev-p5at4gx2mnw7y/flight-api/policy",
+            "dependsOn": [
+                "[resourceId('Microsoft.ApiManagement/service/apis', 'apim-dev-p5at4gx2mnw7y', 'flight-api')]",
+                "[resourceId('Microsoft.ApiManagement/service', 'apim-dev-p5at4gx2mnw7y')]"
+            ],
+            "properties": {
+                "value": "<!--\r\n    - Policies are applied in the order they appear.\r\n    - Position <base/> inside a section to inherit policies from the outer scope.\r\n    - Comments within policies are not preserved.\r\n-->\r\n<!-- Add policies as children to the <inbound>, <outbound>, <backend>, and <on-error> elements -->\r\n<policies>\r\n  <!-- Throttle, authorize, validate, cache, or transform the requests -->\r\n  <inbound>\r\n    <validate-jwt header-name=\"Authorization\" failed-validation-httpcode=\"401\" failed-validation-error-message=\"Unauthorized. Access token is missing or invalid.\">\r\n      <openid-config url=\"https://login.microsoftonline.com/kainiindustries.net/.well-known/openid-configuration\" />\r\n      <audiences>\r\n        <audience>a39ecde7-73e9-4866-a016-88e28952cefd</audience>\r\n      </audiences>\r\n      <required-claims>\r\n        <claim name=\"roles\" match=\"all\">\r\n          <value>flight.read</value>\r\n          <value>flight.write</value>\r\n        </claim>\r\n      </required-claims>\r\n    </validate-jwt>\r\n    <base />\r\n  </inbound>\r\n  <!-- Control if and how the requests are forwarded to services  -->\r\n  <backend>\r\n    <base />\r\n  </backend>\r\n  <!-- Customize the responses -->\r\n  <outbound>\r\n    <base />\r\n  </outbound>\r\n  <!-- Handle exceptions and customize error responses  -->\r\n  <on-error>\r\n    <base />\r\n  </on-error>\r\n</policies>",
+                "format": "xml"
+            }
+        },
+        {
+            "type": "Microsoft.ApiManagement/service/apis/schemas",
+            "apiVersion": "2023-05-01-preview",
+            "name": "apim-dev-p5at4gx2mnw7y/booking-api/6653c650313e2f11289ff41a",
+            "dependsOn": [
+                "[resourceId('Microsoft.ApiManagement/service/apis', 'apim-dev-p5at4gx2mnw7y', 'booking-api')]",
+                "[resourceId('Microsoft.ApiManagement/service', 'apim-dev-p5at4gx2mnw7y')]"
+            ],
+            "properties": {
+                "contentType": "application/vnd.oai.openapi.components+json",
+                "document": {}
+            }
+        },
+        {
+            "type": "Microsoft.ApiManagement/service/apis/schemas",
+            "apiVersion": "2023-05-01-preview",
+            "name": "apim-dev-p5at4gx2mnw7y/customer-api/6653c683733e33056ccbe117",
+            "dependsOn": [
+                "[resourceId('Microsoft.ApiManagement/service/apis', 'apim-dev-p5at4gx2mnw7y', 'customer-api')]",
+                "[resourceId('Microsoft.ApiManagement/service', 'apim-dev-p5at4gx2mnw7y')]"
+            ],
+            "properties": {
+                "contentType": "application/vnd.oai.openapi.components+json",
+                "document": {}
+            }
+        },
+        {
+            "type": "Microsoft.ApiManagement/service/apis/schemas",
+            "apiVersion": "2023-05-01-preview",
+            "name": "apim-dev-p5at4gx2mnw7y/flight-api/6653c6adfffee31fdc79683e",
+            "dependsOn": [
+                "[resourceId('Microsoft.ApiManagement/service/apis', 'apim-dev-p5at4gx2mnw7y', 'flight-api')]",
+                "[resourceId('Microsoft.ApiManagement/service', 'apim-dev-p5at4gx2mnw7y')]"
+            ],
+            "properties": {
+                "contentType": "application/vnd.oai.openapi.components+json",
+                "document": {}
+            }
+        },
+        {
+            "type": "Microsoft.ApiManagement/service/apis/wikis",
+            "apiVersion": "2023-05-01-preview",
+            "name": "apim-dev-p5at4gx2mnw7y/booking-api/default",
+            "dependsOn": [
+                "[resourceId('Microsoft.ApiManagement/service/apis', 'apim-dev-p5at4gx2mnw7y', 'booking-api')]",
+                "[resourceId('Microsoft.ApiManagement/service', 'apim-dev-p5at4gx2mnw7y')]"
+            ],
+            "properties": {
+                "documents": []
+            }
+        },
+        {
+            "type": "Microsoft.ApiManagement/service/apis/wikis",
+            "apiVersion": "2023-05-01-preview",
+            "name": "apim-dev-p5at4gx2mnw7y/customer-api/default",
+            "dependsOn": [
+                "[resourceId('Microsoft.ApiManagement/service/apis', 'apim-dev-p5at4gx2mnw7y', 'customer-api')]",
+                "[resourceId('Microsoft.ApiManagement/service', 'apim-dev-p5at4gx2mnw7y')]"
+            ],
+            "properties": {
+                "documents": []
+            }
+        },
+        {
+            "type": "Microsoft.ApiManagement/service/apis/wikis",
+            "apiVersion": "2023-05-01-preview",
+            "name": "apim-dev-p5at4gx2mnw7y/flight-api/default",
+            "dependsOn": [
+                "[resourceId('Microsoft.ApiManagement/service/apis', 'apim-dev-p5at4gx2mnw7y', 'flight-api')]",
+                "[resourceId('Microsoft.ApiManagement/service', 'apim-dev-p5at4gx2mnw7y')]"
+            ],
+            "properties": {
+                "documents": []
+            }
+        }
+    ]
+}

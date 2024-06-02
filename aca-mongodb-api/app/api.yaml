@@ -1,0 +1,247 @@
+openapi: 3.0.0
+info:
+  title: Go Flight API
+  version: 1.0.0
+paths:
+  /bookings:
+    get:
+      summary: Get all bookings
+      responses:
+        '200':
+          description: A list of bookings
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Booking'
+        '500':
+          description: Unable to retrieve bookings
+  /booking:
+    get:
+      summary: Get a booking
+      parameters:
+        - name: id
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Booking details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Booking'
+        '404':
+          description: Booking not found
+        '500':
+          description: Unable to retrieve booking
+    post:
+      summary: Create a new booking
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Booking'
+      responses:
+        '201':
+          description: Booking created
+        '400':
+          description: Booking already exists
+        '500':
+          description: Unable to insert booking
+    delete:
+      summary: Delete a booking
+      parameters:
+        - name: id
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Booking deleted
+        '404':
+          description: Booking not found
+        '500':
+          description: Unable to delete booking
+  /customers:
+    get:
+      summary: Get all customers
+      responses:
+        '200':
+          description: A list of customers
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Customer'
+        '500':
+          description: Unable to retrieve customers
+  /customer:
+    get:
+      summary: Get a customer
+      parameters:
+        - name: id
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Customer details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+        '404':
+          description: Customer not found
+        '500':
+          description: Unable to retrieve customer
+    post:
+      summary: Create a new customer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Customer'
+      responses:
+        '201':
+          description: Customer created
+        '400':
+          description: Customer already exists
+        '500':
+          description: Unable to insert customer
+    delete:
+      summary: Delete a customer
+      parameters:
+        - name: id
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Customer deleted
+        '404':
+          description: Customer not found
+        '500':
+          description: Unable to delete customer
+  /flights:
+    get:
+      summary: Get all flights
+      responses:
+        '200':
+          description: A list of flights
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Flight'
+        '500':
+          description: Unable to retrieve flights
+  /flight:
+    get:
+      summary: Get a flight
+      parameters:
+        - name: id
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Flight details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Flight'
+        '404':
+          description: Flight not found
+        '500':
+          description: Unable to retrieve flight
+    post:
+      summary: Create a new flight
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Flight'
+      responses:
+        '201':
+          description: Flight created
+        '400':
+          description: Flight already exists
+        '500':
+          description: Unable to insert flight
+    delete:
+      summary: Delete a flight
+      parameters:
+        - name: id
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Flight deleted
+        '404':
+          description: Flight not found
+        '500':
+          description: Unable to delete flight
+components:
+  schemas:
+    Flight:
+      type: object
+      properties:
+        id:
+          type: string
+        origin:
+          type: string
+        destination:
+          type: string
+        departureDate:
+          type: string
+        arrivalDate:
+          type: string
+        carrierId:
+          type: string
+        carrierName:
+          type: string
+        price: 
+          type: number
+    Customer:
+      type: object
+      properties:
+        id:
+          type: string
+        firstName: 
+          type: string
+        lastName:
+          type: string
+        streetAddress:
+          type: string  
+        city: 
+          type: string
+        zip: 
+          type: string
+        country:
+          type: string
+    Booking:
+      type: object
+      properties:
+        id:
+          type: string
+        customerId:
+          type: string
+        flightId: 
+          type: string
+        date:
+          type: string
+  

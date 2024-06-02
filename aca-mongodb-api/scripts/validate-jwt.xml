@@ -1,0 +1,40 @@
+<!--
+    - Policies are applied in the order they appear.
+    - Position <base/> inside a section to inherit policies from the outer scope.
+    - Comments within policies are not preserved.
+-->
+<!-- Add policies as children to the <inbound>, <outbound>, <backend>, and <on-error> elements -->
+<policies>
+    <!-- Throttle, authorize, validate, cache, or transform the requests -->
+    <inbound>
+        <validate-jwt header-name="Authorization" failed-validation-httpcode="401" failed-validation-error-message="Unauthorized. Access token is missing or invalid.">
+            <openid-config url="https://login.microsoftonline.com/3d49be6f-6e38-404b-bbd4-f61c1a2d25bf/.well-known/openid-configuration" />
+            <audiences>
+                <audience>a39ecde7-73e9-4866-a016-88e28952cefd</audience>
+            </audiences>
+            <issuers>
+                <issuer>https://sts.windows.net/3d49be6f-6e38-404b-bbd4-f61c1a2d25bf</issuer>
+                <issuer>https://login.microsoftonline.com/3d49be6f-6e38-404b-bbd4-f61c1a2d25bf/v2.0</issuer>
+            </issuers>
+            <required-claims>
+                <claim name="roles" match="all">
+                    <value>booking.write</value>
+                    <value>booking.read</value>
+                </claim>
+            </required-claims>
+        </validate-jwt>
+        <base />
+    </inbound>
+    <!-- Control if and how the requests are forwarded to services  -->
+    <backend>
+        <base />
+    </backend>
+    <!-- Customize the responses -->
+    <outbound>
+        <base />
+    </outbound>
+    <!-- Handle exceptions and customize error responses  -->
+    <on-error>
+        <base />
+    </on-error>
+</policies>

@@ -1,0 +1,902 @@
+[
+  {
+    "number": "BA281",
+    "carrier": "Qantas",
+    "origin": "Los Angeles",
+    "destination": "HongKong",
+    "departure": "2024-06-27T11:13:14Z",
+    "arrival": "2024-06-18T03:35:30Z",
+    "price": 1429
+  },
+  {
+    "number": "NZ289",
+    "carrier": "Qantas",
+    "origin": "Mexico City",
+    "destination": "NewYork",
+    "departure": "2024-06-23T02:09:41Z",
+    "arrival": "2024-06-02T05:24:04Z",
+    "price": 1740
+  },
+  {
+    "number": "NZ150",
+    "carrier": "Qantas",
+    "origin": "Berlin",
+    "destination": "Tokyo",
+    "departure": "2024-06-01T06:37:12Z",
+    "arrival": "2024-06-18T04:28:33Z",
+    "price": 2489
+  },
+  {
+    "number": "BA297",
+    "carrier": "British Airways",
+    "origin": "Sydney",
+    "destination": "Glasgow",
+    "departure": "2024-06-02T07:11:44Z",
+    "arrival": "2024-06-17T03:16:50Z",
+    "price": 1912
+  },
+  {
+    "number": "BA143",
+    "carrier": "Qantas",
+    "origin": "Mexico City",
+    "destination": "Amsterdam",
+    "departure": "2024-06-09T04:52:51Z",
+    "arrival": "2024-05-31T07:00:26Z",
+    "price": 1427
+  },
+  {
+    "number": "BA288",
+    "carrier": "Air New Zealand",
+    "origin": "Los Angeles",
+    "destination": "Amsterdam",
+    "departure": "2024-06-04T11:47:37Z",
+    "arrival": "2024-06-23T06:52:15Z",
+    "price": 1236
+  },
+  {
+    "number": "QF164",
+    "carrier": "British Airways",
+    "origin": "Mexico City",
+    "destination": "HongKong",
+    "departure": "2024-06-19T06:36:20Z",
+    "arrival": "2024-06-19T12:45:23Z",
+    "price": 2056
+  },
+  {
+    "number": "NZ134",
+    "carrier": "Air New Zealand",
+    "origin": "Melbourne",
+    "destination": "HongKong",
+    "departure": "2024-06-29T02:02:50Z",
+    "arrival": "2024-06-24T08:08:54Z",
+    "price": 1486
+  },
+  {
+    "number": "EM245",
+    "carrier": "Emirates",
+    "origin": "Los Angeles",
+    "destination": "Tokyo",
+    "departure": "2024-06-04T03:55:11Z",
+    "arrival": "2024-06-10T03:11:39Z",
+    "price": 2856
+  },
+  {
+    "number": "NZ157",
+    "carrier": "Qantas",
+    "origin": "Melbourne",
+    "destination": "Perth",
+    "departure": "2024-06-03T08:36:47Z",
+    "arrival": "2024-06-06T08:11:19Z",
+    "price": 723
+  },
+  {
+    "number": "QF139",
+    "carrier": "Emirates",
+    "origin": "Paris",
+    "destination": "Adelaide",
+    "departure": "2024-05-31T01:07:32Z",
+    "arrival": "2024-06-14T04:37:51Z",
+    "price": 1646
+  },
+  {
+    "number": "BA192",
+    "carrier": "Air New Zealand",
+    "origin": "Berlin",
+    "destination": "Adelaide",
+    "departure": "2024-06-01T02:45:31Z",
+    "arrival": "2024-06-08T08:56:56Z",
+    "price": 2249
+  },
+  {
+    "number": "NZ253",
+    "carrier": "Air New Zealand",
+    "origin": "Mexico City",
+    "destination": "Tokyo",
+    "departure": "2024-06-02T10:40:44Z",
+    "arrival": "2024-06-25T09:10:52Z",
+    "price": 2438
+  },
+  {
+    "number": "QF237",
+    "carrier": "Emirates",
+    "origin": "Sydney",
+    "destination": "Adelaide",
+    "departure": "2024-06-20T02:49:30Z",
+    "arrival": "2024-06-14T06:55:02Z",
+    "price": 2311
+  },
+  {
+    "number": "QF191",
+    "carrier": "Air New Zealand",
+    "origin": "Madrid",
+    "destination": "Oslo",
+    "departure": "2024-06-21T10:26:54Z",
+    "arrival": "2024-06-10T07:32:20Z",
+    "price": 1884
+  },
+  {
+    "number": "QF219",
+    "carrier": "Air New Zealand",
+    "origin": "Los Angeles",
+    "destination": "Adelaide",
+    "departure": "2024-06-13T10:49:53Z",
+    "arrival": "2024-06-02T09:12:18Z",
+    "price": 1815
+  },
+  {
+    "number": "EM210",
+    "carrier": "British Airways",
+    "origin": "Mexico City",
+    "destination": "Oslo",
+    "departure": "2024-06-20T08:08:50Z",
+    "arrival": "2024-06-07T08:34:45Z",
+    "price": 1689
+  },
+  {
+    "number": "QF176",
+    "carrier": "Qantas",
+    "origin": "Sydney",
+    "destination": "Amsterdam",
+    "departure": "2024-06-03T09:40:44Z",
+    "arrival": "2024-06-20T11:12:50Z",
+    "price": 2154
+  },
+  {
+    "number": "QF215",
+    "carrier": "Air New Zealand",
+    "origin": "Madrid",
+    "destination": "NewYork",
+    "departure": "2024-06-29T02:44:18Z",
+    "arrival": "2024-06-08T03:59:52Z",
+    "price": 1439
+  },
+  {
+    "number": "QF144",
+    "carrier": "Emirates",
+    "origin": "Los Angeles",
+    "destination": "HongKong",
+    "departure": "2024-06-22T05:59:51Z",
+    "arrival": "2024-06-03T09:53:28Z",
+    "price": 818
+  },
+  {
+    "number": "QF171",
+    "carrier": "Emirates",
+    "origin": "Melbourne",
+    "destination": "Perth",
+    "departure": "2024-06-05T12:52:10Z",
+    "arrival": "2024-06-18T07:26:42Z",
+    "price": 1085
+  },
+  {
+    "number": "BA250",
+    "carrier": "Qantas",
+    "origin": "Berlin",
+    "destination": "Oslo",
+    "departure": "2024-06-23T08:36:47Z",
+    "arrival": "2024-06-24T07:50:10Z",
+    "price": 2874
+  },
+  {
+    "number": "BA182",
+    "carrier": "Air New Zealand",
+    "origin": "Paris",
+    "destination": "NewYork",
+    "departure": "2024-06-02T12:18:59Z",
+    "arrival": "2024-06-28T03:40:24Z",
+    "price": 2482
+  },
+  {
+    "number": "QF213",
+    "carrier": "Air New Zealand",
+    "origin": "Mexico City",
+    "destination": "Glasgow",
+    "departure": "2024-06-19T07:05:43Z",
+    "arrival": "2024-06-08T01:23:26Z",
+    "price": 1534
+  },
+  {
+    "number": "EM168",
+    "carrier": "British Airways",
+    "origin": "Paris",
+    "destination": "Oslo",
+    "departure": "2024-06-25T05:28:13Z",
+    "arrival": "2024-06-04T07:45:24Z",
+    "price": 1598
+  },
+  {
+    "number": "QF224",
+    "carrier": "Air New Zealand",
+    "origin": "Madrid",
+    "destination": "HongKong",
+    "departure": "2024-06-08T12:36:16Z",
+    "arrival": "2024-06-10T09:21:06Z",
+    "price": 2163
+  },
+  {
+    "number": "BA209",
+    "carrier": "British Airways",
+    "origin": "Los Angeles",
+    "destination": "Perth",
+    "departure": "2024-06-01T11:58:29Z",
+    "arrival": "2024-06-14T06:44:36Z",
+    "price": 1734
+  },
+  {
+    "number": "EM297",
+    "carrier": "British Airways",
+    "origin": "Los Angeles",
+    "destination": "NewYork",
+    "departure": "2024-06-17T03:54:46Z",
+    "arrival": "2024-05-31T09:57:36Z",
+    "price": 2014
+  },
+  {
+    "number": "EM144",
+    "carrier": "Air New Zealand",
+    "origin": "London",
+    "destination": "Tokyo",
+    "departure": "2024-06-05T10:33:13Z",
+    "arrival": "2024-06-15T01:29:23Z",
+    "price": 1411
+  },
+  {
+    "number": "EM131",
+    "carrier": "Air New Zealand",
+    "origin": "Paris",
+    "destination": "Amsterdam",
+    "departure": "2024-06-08T09:46:23Z",
+    "arrival": "2024-06-04T10:19:41Z",
+    "price": 1253
+  },
+  {
+    "number": "QF289",
+    "carrier": "Air New Zealand",
+    "origin": "London",
+    "destination": "HongKong",
+    "departure": "2024-06-02T08:41:01Z",
+    "arrival": "2024-05-31T06:39:34Z",
+    "price": 1865
+  },
+  {
+    "number": "NZ152",
+    "carrier": "Qantas",
+    "origin": "Melbourne",
+    "destination": "Tokyo",
+    "departure": "2024-06-20T12:31:05Z",
+    "arrival": "2024-06-14T06:31:59Z",
+    "price": 1558
+  },
+  {
+    "number": "BA192",
+    "carrier": "Air New Zealand",
+    "origin": "Paris",
+    "destination": "HongKong",
+    "departure": "2024-06-18T11:46:48Z",
+    "arrival": "2024-06-24T03:57:35Z",
+    "price": 1977
+  },
+  {
+    "number": "QF159",
+    "carrier": "Emirates",
+    "origin": "London",
+    "destination": "Adelaide",
+    "departure": "2024-06-23T02:32:37Z",
+    "arrival": "2024-06-17T05:34:52Z",
+    "price": 2311
+  },
+  {
+    "number": "EM249",
+    "carrier": "Air New Zealand",
+    "origin": "Los Angeles",
+    "destination": "Adelaide",
+    "departure": "2024-06-13T02:28:37Z",
+    "arrival": "2024-06-06T03:23:05Z",
+    "price": 1100
+  },
+  {
+    "number": "NZ112",
+    "carrier": "British Airways",
+    "origin": "Mexico City",
+    "destination": "Adelaide",
+    "departure": "2024-06-17T05:28:29Z",
+    "arrival": "2024-06-20T12:10:48Z",
+    "price": 879
+  },
+  {
+    "number": "NZ187",
+    "carrier": "Qantas",
+    "origin": "Berlin",
+    "destination": "Perth",
+    "departure": "2024-06-25T08:48:57Z",
+    "arrival": "2024-06-26T04:12:28Z",
+    "price": 1096
+  },
+  {
+    "number": "BA295",
+    "carrier": "British Airways",
+    "origin": "London",
+    "destination": "Oslo",
+    "departure": "2024-06-27T01:22:14Z",
+    "arrival": "2024-06-07T10:37:50Z",
+    "price": 702
+  },
+  {
+    "number": "EM129",
+    "carrier": "Qantas",
+    "origin": "Paris",
+    "destination": "Tokyo",
+    "departure": "2024-06-12T03:27:27Z",
+    "arrival": "2024-05-31T08:18:48Z",
+    "price": 1878
+  },
+  {
+    "number": "BA228",
+    "carrier": "Qantas",
+    "origin": "Berlin",
+    "destination": "Oslo",
+    "departure": "2024-06-17T07:32:31Z",
+    "arrival": "2024-06-13T09:04:00Z",
+    "price": 2703
+  },
+  {
+    "number": "EM189",
+    "carrier": "Emirates",
+    "origin": "Paris",
+    "destination": "Amsterdam",
+    "departure": "2024-06-16T02:07:55Z",
+    "arrival": "2024-06-07T09:48:05Z",
+    "price": 1861
+  },
+  {
+    "number": "QF210",
+    "carrier": "British Airways",
+    "origin": "Los Angeles",
+    "destination": "Adelaide",
+    "departure": "2024-06-08T08:28:25Z",
+    "arrival": "2024-06-24T08:02:10Z",
+    "price": 1240
+  },
+  {
+    "number": "BA240",
+    "carrier": "Qantas",
+    "origin": "Paris",
+    "destination": "NewYork",
+    "departure": "2024-06-25T04:41:10Z",
+    "arrival": "2024-06-24T03:43:33Z",
+    "price": 1077
+  },
+  {
+    "number": "EM105",
+    "carrier": "Air New Zealand",
+    "origin": "Sydney",
+    "destination": "HongKong",
+    "departure": "2024-06-23T01:24:00Z",
+    "arrival": "2024-06-15T04:56:13Z",
+    "price": 2033
+  },
+  {
+    "number": "NZ117",
+    "carrier": "Emirates",
+    "origin": "Los Angeles",
+    "destination": "Oslo",
+    "departure": "2024-06-20T06:29:00Z",
+    "arrival": "2024-06-12T02:50:17Z",
+    "price": 1638
+  },
+  {
+    "number": "NZ226",
+    "carrier": "Qantas",
+    "origin": "Berlin",
+    "destination": "NewYork",
+    "departure": "2024-06-25T02:01:34Z",
+    "arrival": "2024-06-16T08:45:53Z",
+    "price": 1945
+  },
+  {
+    "number": "BA258",
+    "carrier": "Qantas",
+    "origin": "Paris",
+    "destination": "HongKong",
+    "departure": "2024-06-19T06:30:36Z",
+    "arrival": "2024-06-09T02:28:42Z",
+    "price": 1395
+  },
+  {
+    "number": "QF243",
+    "carrier": "British Airways",
+    "origin": "Madrid",
+    "destination": "Tokyo",
+    "departure": "2024-06-07T12:11:14Z",
+    "arrival": "2024-06-11T06:00:01Z",
+    "price": 2536
+  },
+  {
+    "number": "NZ175",
+    "carrier": "Qantas",
+    "origin": "Berlin",
+    "destination": "Adelaide",
+    "departure": "2024-06-06T06:52:35Z",
+    "arrival": "2024-06-19T07:30:58Z",
+    "price": 1267
+  },
+  {
+    "number": "BA139",
+    "carrier": "Qantas",
+    "origin": "Los Angeles",
+    "destination": "Adelaide",
+    "departure": "2024-06-17T02:55:06Z",
+    "arrival": "2024-06-22T07:07:06Z",
+    "price": 1142
+  },
+  {
+    "number": "QF100",
+    "carrier": "Emirates",
+    "origin": "Mexico City",
+    "destination": "NewYork",
+    "departure": "2024-06-11T02:02:56Z",
+    "arrival": "2024-06-18T08:04:10Z",
+    "price": 2400
+  },
+  {
+    "number": "EM151",
+    "carrier": "Qantas",
+    "origin": "Melbourne",
+    "destination": "Tokyo",
+    "departure": "2024-06-27T06:45:46Z",
+    "arrival": "2024-06-03T05:10:21Z",
+    "price": 1549
+  },
+  {
+    "number": "NZ138",
+    "carrier": "British Airways",
+    "origin": "Sydney",
+    "destination": "NewYork",
+    "departure": "2024-06-24T02:42:10Z",
+    "arrival": "2024-06-16T02:58:24Z",
+    "price": 2427
+  },
+  {
+    "number": "EM264",
+    "carrier": "Qantas",
+    "origin": "Melbourne",
+    "destination": "Adelaide",
+    "departure": "2024-06-29T02:58:37Z",
+    "arrival": "2024-05-31T02:43:52Z",
+    "price": 890
+  },
+  {
+    "number": "EM101",
+    "carrier": "Qantas",
+    "origin": "Sydney",
+    "destination": "NewYork",
+    "departure": "2024-06-17T01:14:58Z",
+    "arrival": "2024-06-20T06:55:43Z",
+    "price": 1754
+  },
+  {
+    "number": "NZ167",
+    "carrier": "Emirates",
+    "origin": "Los Angeles",
+    "destination": "Adelaide",
+    "departure": "2024-06-19T09:47:28Z",
+    "arrival": "2024-06-23T12:31:31Z",
+    "price": 2750
+  },
+  {
+    "number": "NZ211",
+    "carrier": "Qantas",
+    "origin": "Sydney",
+    "destination": "NewYork",
+    "departure": "2024-06-23T11:23:37Z",
+    "arrival": "2024-06-04T02:54:21Z",
+    "price": 1281
+  },
+  {
+    "number": "EM165",
+    "carrier": "British Airways",
+    "origin": "Los Angeles",
+    "destination": "Perth",
+    "departure": "2024-06-16T01:03:57Z",
+    "arrival": "2024-06-05T10:05:56Z",
+    "price": 2238
+  },
+  {
+    "number": "BA202",
+    "carrier": "Qantas",
+    "origin": "Los Angeles",
+    "destination": "Perth",
+    "departure": "2024-06-21T07:21:34Z",
+    "arrival": "2024-06-09T09:28:02Z",
+    "price": 1132
+  },
+  {
+    "number": "EM290",
+    "carrier": "Qantas",
+    "origin": "Madrid",
+    "destination": "Adelaide",
+    "departure": "2024-06-08T02:30:39Z",
+    "arrival": "2024-06-12T07:50:19Z",
+    "price": 2421
+  },
+  {
+    "number": "BA245",
+    "carrier": "Emirates",
+    "origin": "Madrid",
+    "destination": "NewYork",
+    "departure": "2024-06-27T05:16:22Z",
+    "arrival": "2024-06-21T07:40:25Z",
+    "price": 2392
+  },
+  {
+    "number": "NZ179",
+    "carrier": "Air New Zealand",
+    "origin": "Berlin",
+    "destination": "Adelaide",
+    "departure": "2024-06-21T07:18:51Z",
+    "arrival": "2024-06-12T05:40:57Z",
+    "price": 2135
+  },
+  {
+    "number": "EM275",
+    "carrier": "Emirates",
+    "origin": "Sydney",
+    "destination": "Glasgow",
+    "departure": "2024-06-08T12:39:55Z",
+    "arrival": "2024-06-26T01:42:13Z",
+    "price": 2709
+  },
+  {
+    "number": "BA163",
+    "carrier": "Qantas",
+    "origin": "Paris",
+    "destination": "Amsterdam",
+    "departure": "2024-06-23T10:53:34Z",
+    "arrival": "2024-06-08T03:56:57Z",
+    "price": 2259
+  },
+  {
+    "number": "NZ164",
+    "carrier": "Air New Zealand",
+    "origin": "Sydney",
+    "destination": "HongKong",
+    "departure": "2024-06-24T04:24:42Z",
+    "arrival": "2024-06-09T12:20:27Z",
+    "price": 1338
+  },
+  {
+    "number": "NZ195",
+    "carrier": "Emirates",
+    "origin": "London",
+    "destination": "Perth",
+    "departure": "2024-06-04T09:24:39Z",
+    "arrival": "2024-06-06T08:19:13Z",
+    "price": 1322
+  },
+  {
+    "number": "NZ240",
+    "carrier": "Air New Zealand",
+    "origin": "Los Angeles",
+    "destination": "Tokyo",
+    "departure": "2024-06-21T04:00:26Z",
+    "arrival": "2024-06-04T04:52:17Z",
+    "price": 2813
+  },
+  {
+    "number": "NZ232",
+    "carrier": "Emirates",
+    "origin": "Melbourne",
+    "destination": "Oslo",
+    "departure": "2024-06-19T11:22:01Z",
+    "arrival": "2024-06-20T04:56:06Z",
+    "price": 2762
+  },
+  {
+    "number": "BA172",
+    "carrier": "British Airways",
+    "origin": "Melbourne",
+    "destination": "Tokyo",
+    "departure": "2024-06-17T04:45:15Z",
+    "arrival": "2024-06-11T09:05:16Z",
+    "price": 1717
+  },
+  {
+    "number": "EM263",
+    "carrier": "Air New Zealand",
+    "origin": "Sydney",
+    "destination": "Tokyo",
+    "departure": "2024-06-16T07:05:30Z",
+    "arrival": "2024-06-15T03:00:19Z",
+    "price": 1749
+  },
+  {
+    "number": "EM197",
+    "carrier": "Emirates",
+    "origin": "Paris",
+    "destination": "Oslo",
+    "departure": "2024-06-12T07:39:04Z",
+    "arrival": "2024-06-06T09:12:46Z",
+    "price": 1064
+  },
+  {
+    "number": "BA285",
+    "carrier": "British Airways",
+    "origin": "Mexico City",
+    "destination": "Tokyo",
+    "departure": "2024-06-23T02:08:07Z",
+    "arrival": "2024-06-26T11:15:59Z",
+    "price": 1203
+  },
+  {
+    "number": "EM264",
+    "carrier": "Emirates",
+    "origin": "Berlin",
+    "destination": "NewYork",
+    "departure": "2024-06-11T08:43:16Z",
+    "arrival": "2024-06-01T02:53:59Z",
+    "price": 2225
+  },
+  {
+    "number": "BA133",
+    "carrier": "British Airways",
+    "origin": "Melbourne",
+    "destination": "Oslo",
+    "departure": "2024-06-03T06:04:39Z",
+    "arrival": "2024-06-13T06:24:44Z",
+    "price": 908
+  },
+  {
+    "number": "BA129",
+    "carrier": "British Airways",
+    "origin": "Madrid",
+    "destination": "Tokyo",
+    "departure": "2024-06-06T02:43:54Z",
+    "arrival": "2024-06-13T03:53:23Z",
+    "price": 1737
+  },
+  {
+    "number": "EM213",
+    "carrier": "British Airways",
+    "origin": "Mexico City",
+    "destination": "Amsterdam",
+    "departure": "2024-06-09T09:19:55Z",
+    "arrival": "2024-06-27T03:38:47Z",
+    "price": 1800
+  },
+  {
+    "number": "BA211",
+    "carrier": "Qantas",
+    "origin": "Madrid",
+    "destination": "NewYork",
+    "departure": "2024-06-24T09:11:04Z",
+    "arrival": "2024-06-25T06:53:02Z",
+    "price": 1990
+  },
+  {
+    "number": "BA272",
+    "carrier": "Air New Zealand",
+    "origin": "Berlin",
+    "destination": "NewYork",
+    "departure": "2024-06-15T09:49:11Z",
+    "arrival": "2024-06-28T07:01:26Z",
+    "price": 2019
+  },
+  {
+    "number": "BA139",
+    "carrier": "British Airways",
+    "origin": "Madrid",
+    "destination": "NewYork",
+    "departure": "2024-06-15T04:47:02Z",
+    "arrival": "2024-06-13T10:36:02Z",
+    "price": 2775
+  },
+  {
+    "number": "EM253",
+    "carrier": "Qantas",
+    "origin": "London",
+    "destination": "Tokyo",
+    "departure": "2024-06-23T06:21:54Z",
+    "arrival": "2024-06-02T06:36:58Z",
+    "price": 2637
+  },
+  {
+    "number": "EM203",
+    "carrier": "Air New Zealand",
+    "origin": "Melbourne",
+    "destination": "HongKong",
+    "departure": "2024-06-17T07:19:20Z",
+    "arrival": "2024-06-22T01:00:52Z",
+    "price": 2690
+  },
+  {
+    "number": "BA233",
+    "carrier": "British Airways",
+    "origin": "Berlin",
+    "destination": "HongKong",
+    "departure": "2024-06-06T02:02:59Z",
+    "arrival": "2024-06-28T03:46:03Z",
+    "price": 1204
+  },
+  {
+    "number": "QF139",
+    "carrier": "Qantas",
+    "origin": "Melbourne",
+    "destination": "Glasgow",
+    "departure": "2024-06-20T02:16:58Z",
+    "arrival": "2024-06-21T03:14:20Z",
+    "price": 1920
+  },
+  {
+    "number": "NZ208",
+    "carrier": "Air New Zealand",
+    "origin": "Mexico City",
+    "destination": "HongKong",
+    "departure": "2024-06-05T12:08:24Z",
+    "arrival": "2024-06-06T02:38:38Z",
+    "price": 1556
+  },
+  {
+    "number": "EM102",
+    "carrier": "British Airways",
+    "origin": "Sydney",
+    "destination": "Adelaide",
+    "departure": "2024-06-26T07:58:32Z",
+    "arrival": "2024-06-28T09:47:53Z",
+    "price": 2989
+  },
+  {
+    "number": "EM131",
+    "carrier": "Emirates",
+    "origin": "Berlin",
+    "destination": "Perth",
+    "departure": "2024-06-28T12:12:45Z",
+    "arrival": "2024-06-01T01:50:18Z",
+    "price": 2428
+  },
+  {
+    "number": "NZ202",
+    "carrier": "Qantas",
+    "origin": "Melbourne",
+    "destination": "Oslo",
+    "departure": "2024-06-06T03:45:56Z",
+    "arrival": "2024-06-13T07:20:50Z",
+    "price": 1126
+  },
+  {
+    "number": "QF276",
+    "carrier": "Emirates",
+    "origin": "Berlin",
+    "destination": "Adelaide",
+    "departure": "2024-06-29T03:32:46Z",
+    "arrival": "2024-06-10T06:45:15Z",
+    "price": 807
+  },
+  {
+    "number": "QF181",
+    "carrier": "Qantas",
+    "origin": "Mexico City",
+    "destination": "Perth",
+    "departure": "2024-06-14T03:00:29Z",
+    "arrival": "2024-06-24T11:30:46Z",
+    "price": 2206
+  },
+  {
+    "number": "EM147",
+    "carrier": "Air New Zealand",
+    "origin": "Paris",
+    "destination": "Oslo",
+    "departure": "2024-05-31T11:45:24Z",
+    "arrival": "2024-06-21T05:49:34Z",
+    "price": 1560
+  },
+  {
+    "number": "QF135",
+    "carrier": "Emirates",
+    "origin": "Los Angeles",
+    "destination": "Perth",
+    "departure": "2024-06-05T12:55:43Z",
+    "arrival": "2024-06-28T03:24:14Z",
+    "price": 2010
+  },
+  {
+    "number": "QF110",
+    "carrier": "British Airways",
+    "origin": "Madrid",
+    "destination": "Tokyo",
+    "departure": "2024-06-06T03:19:36Z",
+    "arrival": "2024-06-04T01:32:51Z",
+    "price": 822
+  },
+  {
+    "number": "BA105",
+    "carrier": "Emirates",
+    "origin": "Madrid",
+    "destination": "Glasgow",
+    "departure": "2024-06-10T07:24:54Z",
+    "arrival": "2024-06-17T03:18:55Z",
+    "price": 2421
+  },
+  {
+    "number": "QF235",
+    "carrier": "Air New Zealand",
+    "origin": "Los Angeles",
+    "destination": "Amsterdam",
+    "departure": "2024-06-24T01:52:04Z",
+    "arrival": "2024-06-01T09:08:55Z",
+    "price": 1934
+  },
+  {
+    "number": "BA256",
+    "carrier": "Emirates",
+    "origin": "Mexico City",
+    "destination": "Amsterdam",
+    "departure": "2024-06-06T05:17:35Z",
+    "arrival": "2024-06-11T09:46:14Z",
+    "price": 1614
+  },
+  {
+    "number": "NZ166",
+    "carrier": "British Airways",
+    "origin": "Mexico City",
+    "destination": "Tokyo",
+    "departure": "2024-06-15T10:21:15Z",
+    "arrival": "2024-06-09T02:46:59Z",
+    "price": 2360
+  },
+  {
+    "number": "EM293",
+    "carrier": "Air New Zealand",
+    "origin": "London",
+    "destination": "Tokyo",
+    "departure": "2024-06-09T09:05:21Z",
+    "arrival": "2024-06-22T05:19:07Z",
+    "price": 853
+  },
+  {
+    "number": "NZ228",
+    "carrier": "Air New Zealand",
+    "origin": "Melbourne",
+    "destination": "Tokyo",
+    "departure": "2024-06-21T12:57:24Z",
+    "arrival": "2024-06-29T06:15:19Z",
+    "price": 2196
+  },
+  {
+    "number": "NZ252",
+    "carrier": "Air New Zealand",
+    "origin": "Melbourne",
+    "destination": "HongKong",
+    "departure": "2024-06-14T09:34:39Z",
+    "arrival": "2024-06-08T04:45:34Z",
+    "price": 2585
+  },
+  {
+    "number": "QF105",
+    "carrier": "Emirates",
+    "origin": "Los Angeles",
+    "destination": "Amsterdam",
+    "departure": "2024-06-28T12:19:02Z",
+    "arrival": "2024-06-22T03:13:50Z",
+    "price": 1384
+  }
+]
