@@ -10,7 +10,7 @@ import type { CustomerData } from "../types";
 import { MsalAuthenticationTemplate, useMsal } from "@azure/msal-react";
 import { useEffect, useState } from "react";
 import { loginRequest } from "../authConfig";
-import { callFlightApi } from "../FlightApiCall";
+import { get } from "../FlightApiCall";
 import { ErrorComponent } from "./ErrorComponent";
 import { Loading } from "./Loading";
 import { apiConfig } from "../authConfig";
@@ -23,7 +23,7 @@ const CustomerContent = () => {
 
   useEffect(() => {
     if (!data && inProgress === InteractionStatus.None) {
-      callFlightApi(apiConfig.customerEndpoint + "/customers")
+      get(apiConfig.customerEndpoint + "/customers")
         .then(data => {
           setData(data);
           setLoading(false);
@@ -42,7 +42,7 @@ const CustomerContent = () => {
           }
         });
     }
-  }, [inProgress, data, instance]);
+  }, [inProgress, data, instance, loading]);
 
   if (loading) {
     return <div>Loading...</div>;

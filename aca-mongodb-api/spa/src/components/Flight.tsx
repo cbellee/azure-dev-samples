@@ -10,7 +10,7 @@ import type { FlightData } from "../types";
 import { MsalAuthenticationTemplate, useMsal } from "@azure/msal-react";
 import { useEffect, useState } from "react";
 import { loginRequest } from "../authConfig";
-import { callFlightApi } from "../FlightApiCall";
+import { get } from "../FlightApiCall";
 import { ErrorComponent } from "./ErrorComponent";
 import { Loading } from "./Loading";
 import { apiConfig } from "../authConfig";
@@ -23,14 +23,12 @@ const FlightContent = () => {
 
   useEffect(() => {
     if (!data && inProgress === InteractionStatus.None) {
-      callFlightApi(apiConfig.flightEndpoint + "/flights")
+      get(apiConfig.flightEndpoint + "/flights")
         .then(data => {
-          console.log("data: " + data);
           setData(data);
           setLoading(false);
         })
         .catch(error => {
-          console.log("error: " + error);
           setError(error);
           setLoading(false);
         })
@@ -50,7 +48,7 @@ const FlightContent = () => {
   }
 
   if (error) {
-    return <div>Error: {error.message}</div>
+    return <div>{error.message}</div>
   }
 
   if (!data || data.length <= 0) {

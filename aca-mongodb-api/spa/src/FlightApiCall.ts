@@ -1,7 +1,7 @@
 import { loginRequest, apiConfig } from "./authConfig";
 import { msalInstance } from "./main";
 
-export async function callFlightApi(endpoint: string) {
+export async function get(endpoint: string) {
   const account = msalInstance.getActiveAccount();
   if (!account) {
     throw Error(
@@ -20,19 +20,24 @@ export async function callFlightApi(endpoint: string) {
   console.log(bearer);
 
   headers.append("Authorization", bearer);
+  headers.append("Content-Type", "application/json");
+  headers.append("X-Content-Type-Options", "nosniff");
+  headers.append("Accept", "application/json");
 
   const options = {
     method: "GET",
     headers: headers,
   };
 
-  return await fetch(endpoint, options)
-    .then((response) => {
-      console.log(response.status);
-      return response.json();
-    })
-    .catch((error) => {
-      console.error(error.message);
-      return error.message;
-    });
+  try {
+    const resp = await fetch(endpoint, options);
+    if (!resp.ok) {
+      throw new Error(`Error: ${resp.status} - ${resp.statusText}`);
+    } else {
+      const result = await resp.json();
+      return result;
+    }
+  } catch (error) {
+    throw error;
+  }
 }

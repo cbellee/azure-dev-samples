@@ -10,7 +10,7 @@ import type { BookingData } from "../types";
 import { MsalAuthenticationTemplate, useMsal } from "@azure/msal-react";
 import { useEffect, useState } from "react";
 import { loginRequest } from "../authConfig";
-import { callFlightApi } from "../FlightApiCall";
+import { get } from "../FlightApiCall";
 import { ErrorComponent } from "./ErrorComponent";
 import { Loading } from "./Loading";
 import { apiConfig } from "../authConfig";
@@ -23,7 +23,7 @@ const BookingContent = () => {
 
   useEffect(() => {
     if (!data && inProgress === InteractionStatus.None) {
-      callFlightApi(apiConfig.bookingEndpoint + "/bookings")
+      get(apiConfig.bookingEndpoint + "/bookings")
         .then(data => {
           setData(data);
           setLoading(false);

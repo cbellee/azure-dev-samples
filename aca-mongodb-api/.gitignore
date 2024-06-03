@@ -23,5 +23,4 @@ dist-ssr
 *.sln
 *.sw?
 
-# Environment file in root directory
 .env

@@ -7,6 +7,20 @@
 <policies>
     <!-- Throttle, authorize, validate, cache, or transform the requests -->
     <inbound>
+        <cors allow-credentials="false">
+            <allowed-origins>
+                <origin>http://localhost:3000/</origin>
+            </allowed-origins>
+            <allowed-methods preflight-result-max-age="300">
+                <method>*</method>
+            </allowed-methods>
+            <allowed-headers>
+                <header>*</header>
+            </allowed-headers>
+            <expose-headers>
+                <header>*</header>
+            </expose-headers>
+        </cors>
         <validate-jwt header-name="Authorization" failed-validation-httpcode="401" failed-validation-error-message="Unauthorized. Access token is missing or invalid.">
             <openid-config url="https://login.microsoftonline.com/3d49be6f-6e38-404b-bbd4-f61c1a2d25bf/.well-known/openid-configuration" />
             <audiences>
@@ -18,8 +32,8 @@
             </issuers>
             <required-claims>
                 <claim name="roles" match="all">
-                    <value>booking.write</value>
-                    <value>booking.read</value>
+                    <value>flight.write</value>
+                    <value>flight.read</value>
                 </claim>
             </required-claims>
         </validate-jwt>
