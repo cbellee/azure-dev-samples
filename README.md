@@ -1,1 +1,1 @@
-# My collection of Azure Application Development examples
+# A collection of Azure Application Development examples
