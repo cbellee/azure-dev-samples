@@ -1,0 +1,95 @@
+openapi: 3.0.0
+info:
+  title: customer
+  version: 1.0.0
+paths:
+  /customers:
+    get:
+      summary: Get all customers
+      responses:
+        '200':
+          description: A list of customers
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Customer'
+        '500':
+          description: Unable to retrieve customers
+    post:
+      summary: Create a new customer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Customer'
+      responses:
+        '201':
+          description: Customer created
+        '400':
+          description: Invalid input
+        '500':
+          description: Unable to create customer
+  /customer/{id}:
+    get:
+      summary: Get a customer by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Customer details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+        '404':
+          description: Customer not found
+        '500':
+          description: Unable to retrieve customer
+    delete:
+      summary: Delete a customer by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Customer deleted
+        '404':
+          description: Customer not found
+        '500':
+          description: Unable to delete customer
+components:
+  schemas:
+    Customer:
+      type: object
+      properties:
+        id:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        streetAddress:
+          type: string
+        email:
+          type: string
+        phone:  
+          type: string
+        city:
+          type: string
+        state:     
+          type: string
+        zip:  
+          type: string
+        country:
+          type: string
+          

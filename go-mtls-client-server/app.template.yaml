@@ -1,0 +1,82 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mtls-app-svc
+  namespace: default
+spec:
+  ports:
+  - port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: mtls-app
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mtls-app-deployment
+  labels:
+    app: mtls-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: mtls-app
+  template:
+    metadata:
+      labels:
+        app: mtls-app
+    spec:
+      volumes:
+        - name: certs
+          secret:
+            secretName: backend-tls
+            items:
+              - key: tls.crt
+                path: tls.crt
+              - key: tls.key
+                path: tls.key
+      containers:
+      - name: mtls-app
+        image: <IMAGE_TAG>
+        volumeMounts:
+          - name: certs
+            mountPath: /etc/certs
+        ports:
+        - containerPort: 8080
+        resources:
+          limits:
+            cpu: "1"
+            memory: 500Mi
+          requests:
+            cpu: "0.5"
+            memory: 250Mi
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: mtls-app-ingress
+  annotations:
+    kubernetes.io/ingress.class: azure/application-gateway
+    appgw.ingress.kubernetes.io/ssl-redirect: "true"
+    appgw.ingress.kubernetes.io/backend-hostname: "backend.kainiindustries.net"
+    appgw.ingress.kubernetes.io/appgw-trusted-root-certificate: "backend-root-ca-cert"
+    appgw.ingress.kubernetes.io/backend-protocol: "https"
+    # appgw.ingress.kubernetes.io/appgw-ssl-profile: "mtls-profile-01"
+spec:
+  tls:
+    - secretName: frontend-tls
+      hosts:
+        - mtls.com
+  rules:
+    - host: mtls.com
+      http:
+        paths:
+        - path: /
+          pathType: Exact
+          backend:
+            service:
+              name: mtls-app-svc
+              port:
+                number: 8080
+

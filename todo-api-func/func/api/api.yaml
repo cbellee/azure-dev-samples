@@ -1,0 +1,151 @@
+openapi: 3.0.1
+info:
+  title: todo-api
+  description: Example Todo API Definition
+  version: '0.1'
+servers:
+  - url: ''
+paths:
+  /api/todos/{id}:
+    delete:
+      description: Auto generated using Swagger Inspector
+      summary: delete a todo
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+          example: 1
+          required: true
+      responses:
+        '200':
+          description: Auto generated using Swagger Inspector
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  deleted:
+                    type: boolean
+              example:
+                '0':
+                  value: '{"deleted": true}'
+  /api/todos/complete/{id}:
+    patch:
+      description: Auto generated using Swagger Inspector
+      summary: complete a todo
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+          example: 1
+          required: true
+      responses:
+        '200':
+          description: Auto generated using Swagger Inspector
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  updated:
+                    type: boolean
+              example:
+                '0':
+                  value: '{"updated": true}'
+  /api/todos:
+    get:
+      description: Auto generated using Swagger Inspector
+      summary: get all todos
+      responses:
+        '200':
+          description: Auto generated using Swagger Inspector
+          content:
+            application/json:
+              schema:
+                type: array
+                properties: {}
+              example:
+                '0':
+                  value: |
+                    []
+    post:
+      description: Auto generated using Swagger Inspector
+      summary: create a todo
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/newTodo'
+            example:
+              description: 'buy some milk'
+      responses:
+        '200':
+          description: Auto generated using Swagger Inspector
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Description:
+                    type: string
+                  Completed:
+                    type: boolean
+                  Id:
+                    type: integer
+              example:
+                '0':
+                  value: |
+                    {"Id":1,"description":"buy somemilk","completed":false}
+  /api/todos/completed:
+    get:
+      description: Auto generated using Swagger Inspector
+      summary: get all completed todos
+      responses:
+        '200':
+          description: Auto generated using Swagger Inspector
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              example:
+                '0':
+                  value: |
+                    []
+      servers:
+        - url: ''
+  /api/todos/incomplete:
+    get:
+      description: Auto generated using Swagger Inspector
+      summary: get all incomplete todos
+      responses:
+        '200':
+          description: Auto generated using Swagger Inspector
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/todo'
+              example:
+                '0':
+                  value: |
+                    []
+components:
+  schemas:
+    todo:
+      properties:
+        id:
+          type: integer
+        description:
+          type: string
+        completeted:
+          type: boolean
+        createdAt:
+          type: string
+        modifiedAt:
+          type: string
+    newTodo:
+      properties:
+        description:
+          type: string

@@ -1,0 +1,34 @@
+name: 'Build Azure Function & Deploy to Azure Infrastructure'
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+    build:
+      uses: ./.github/workflows/build.yml
+      with:
+        projectPath: './src/DemoFunction'
+        dotnetVersion: '6.0.x'
+    dev:
+      uses: ./.github/workflows/deploy.yml
+      needs: [build]
+      with:
+       environment: 'dev'
+    test:
+      uses: ./.github/workflows/deploy.yml
+      needs: [build, dev]
+      with:
+        environment: 'test'
+    prod:
+      uses: ./.github/workflows/deploy.yml
+      needs: [build, dev, test]
+      with:
+        environment: 'prod'

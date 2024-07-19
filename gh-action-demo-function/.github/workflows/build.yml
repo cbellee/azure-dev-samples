@@ -1,0 +1,45 @@
+name: Build Azure Function
+
+on:
+  workflow_call:
+    inputs:
+      projectPath:
+        description: 'Path to project to deploy'
+        required: true
+        default: 'src/DemoFunction'
+        type: string
+      dotnetVersion:
+        description: '.Net version'
+        required: true
+        default: '6.0.0'
+        type: string
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: 'Checkout GitHub Action'
+      uses: actions/checkout@v3
+
+    - name: Setup DotNet ${{ inputs.dotnetVersion }} Environment
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: ${{ inputs.dotnetVersion }}
+
+    - name: 'Resolve Project Dependencies and Build dotnet Function app'
+      shell: bash
+      run: |
+        pushd './${{ inputs.projectPath }}'
+        dotnet build --configuration Release --output ./output
+        popd
+      
+    - name: Archive production artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: function-artifact
+        path: '${{ inputs.projectPath }}/output'

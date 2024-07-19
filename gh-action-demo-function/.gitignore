@@ -1,0 +1,5 @@
+.env
+/.env
+/scripts/*-credential.json
+bin/
+obj/

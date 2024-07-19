@@ -1,0 +1,100 @@
+name: 'todo api workflow'
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+permissions:
+      id-token: write
+      contents: read
+env:
+  location: 'australiaeast'
+  subscriptionId: 'b2375b5f-8dab-4436-b87c-32bc7fdce5d0'
+  aksAdminGroupObjectId: 'f6a900e2-df11-43e7-ba3e-22be99d3cede'
+jobs:
+  dev-deployment:
+    name: 'Deploy Dev Infrastructure'
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Check out repository'
+        uses: actions/checkout@v3
+      - name: 'Azure Login'
+        uses: azure/login@v1
+        with:
+          client-id: ${{ secrets.client-id }}
+          tenant-id: ${{ secrets.tenant-id }}
+          subscription-id: ${{ secrets.subscription-id }}
+      - uses: azure/cli
+        with:
+          azcliversion: 2.30.0
+          inlineScript: |
+            az account set --subscription ${{ secrets.subscription-id }}
+            az deployment group create \
+              --name 'infra-deployment' \
+              --resource-group $RG_NAME \
+              --template-file ./main.bicep \
+              --parameters location=${{ env.location }} \
+              --parameters appName=$APP_NAME \
+              --parameters environment='dev' \
+              --parameters isPrivate=$IS_PRIVATE \
+              --parameters sqlAdminUserPassword=$SQL_ADMIN_USER_PASSWORD \
+              --parameters containerImageName=$IMAGE_FULL_NAME \
+              --parameters acrName=$ACR_NAME \
+              --parameters adminUserName=$ADMIN_USER_NAME \
+              --parameters adminUserPassword=$ADMIN_USER_PASSWORD \
+              --parameters productApiYaml="$(cat ../func/api/api.yaml)"
+            
+      - uses: azure/arm-deploy@v1
+        name: 'Deploy Dev Infrastructure'
+        id: deploy-dev-infra
+        with: 
+          scope: subscription
+          subscriptionId: ${{ env.subscriptionId }}
+          region: ${{ env.location }}
+          template: ./infra/main.bicep
+          parameters: ./infra/main.bicepparam location=${{ env.location }} aksVersion=${{ env.aksVersion }}
+          deploymentMode: incremental
+          deploymentName: dev-infra-deployment
+  test-deployment:
+    name: 'Deploy Test Infrastructure'
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Check out repository'
+        uses: actions/checkout@v3
+      - name: 'Azure Login'
+        uses: azure/login@v1
+        with:
+          client-id: ${{ secrets.client-id }}
+          tenant-id: ${{ secrets.tenant-id }}
+          subscription-id: ${{ secrets.subscription-id }}
+      - uses: azure/arm-deploy@v1
+        with: 
+          scope: subscription
+          subscriptionId: ${{ env.subscriptionId }}
+          region: ${{ env.location }}
+          template: ./iac/templates/infra.bicep
+          parameters: ./iac/parameters/test/infra.parameters.json location=${{ env.location }} aksVersion=${{ env.aksVersion }}
+          deploymentMode: incremental
+          deploymentName: test-infra-deployment
+  prod-deployment:
+    name: 'Deploy Prod Infrastructure'
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Check out repository'
+        uses: actions/checkout@v3
+      - name: 'Azure Login'
+        uses: azure/login@v1
+        with:
+          client-id: ${{ secrets.client-id }}
+          tenant-id: ${{ secrets.tenant-id }}
+          subscription-id: ${{ secrets.subscription-id }}
+      - uses: azure/arm-deploy@v1
+        with: 
+          scope: subscription
+          subscriptionId: ${{ env.subscriptionId }}
+          region: ${{ env.location }}
+          template: ./iac/templates/infra.bicep
+          parameters: ./iac/parameters/prod/infra.parameters.json location=${{ env.location }} aksVersion=${{ env.aksVersion }}
+          deploymentMode: incremental
+          deploymentName: prod-infra-deployment

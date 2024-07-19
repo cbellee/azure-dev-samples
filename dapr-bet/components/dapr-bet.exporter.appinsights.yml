@@ -1,0 +1,13 @@
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: native
+  namespace: default
+spec:
+  type: exporters.native
+  version: v1
+  metadata:
+    - name: enabled
+      value: "true"
+    - name: agentEndpoint
+      value: dapr-localforwarder.dapr-monitoring.svc.cluster.local:55678

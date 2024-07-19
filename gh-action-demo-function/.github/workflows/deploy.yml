@@ -1,0 +1,90 @@
+name: Deploy Infrastructure & Azure Function
+
+on:
+  workflow_call:
+    inputs:
+      environment:
+        description: 'Environment to deploy to'
+        required: true
+        default: 'dev'
+        type: string
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  deploy:  
+    runs-on: ubuntu-latest 
+    environment: ${{ inputs.environment }}   
+    steps: 
+    - name: 'Checkout GitHub Action'
+      uses: actions/checkout@v3
+
+    - name: Download function artifact
+      uses: actions/download-artifact@v3
+      with:
+        name: function-artifact
+        path: ./artifacts
+
+    - name: 'Azure Login'
+      uses: azure/login@v1
+      with:
+          client-id: ${{ vars.CLIENT_ID }}
+          tenant-id: ${{ vars.TENANT_ID }}
+          subscription-id: ${{ vars.SUBSCRIPTION_ID }}
+
+    - name: 'Create Resource Group'
+      uses: Azure/CLI@v1
+      with:
+        inlineScript: |
+          #!/bin/bash
+          az group create --name ${{ vars.RESOURCE_GROUP }} --location ${{ vars.LOCATION }}
+          echo "Azure resource group '${{ vars.RESOURCE_GROUP }}' created"
+
+    - name: 'Deploy Infrastructure'
+      uses: azure/arm-deploy@v1
+      with:
+        subscriptionId: ${{ vars.SUBSCRIPTION_ID }}
+        resourceGroupName: ${{ vars.RESOURCE_GROUP }}
+        template: ./bicep/main.bicep
+        parameters: 'apiUrl=${{ vars.API_URL }} apiKey=${{ vars.API_KEY }}  appName=${{ vars.APP }} environment=${{ inputs.environment }} location=${{ vars.LOCATION }}'
+        failOnStdErr: false
+        deploymentMode: 'Incremental'
+        deploymentName: 'DeployInfrastructure'
+          
+    - name: 'Get Bicep outputs'
+      uses: Azure/CLI@v1
+      with:
+        inlineScript: |
+          #!/bin/bash
+          echo "Getting Bicep outputs"
+          echo FUNCTION_NAME=$(az deployment group show --name 'DeployInfrastructure' --resource-group ${{ vars.RESOURCE_GROUP }} --query properties.outputs.functionName.value --output tsv) >> $GITHUB_ENV
+          echo STORAGE_ACCOUNT_NAME=$(az deployment group show --name 'DeployInfrastructure' --resource-group ${{ vars.RESOURCE_GROUP }} --query properties.outputs.storageAccountName.value --output tsv) >> $GITHUB_ENV
+          echo STORAGE_CONTAINER_NAME=$(az deployment group show --name 'DeployInfrastructure' --resource-group ${{ vars.RESOURCE_GROUP }} --query properties.outputs.containerName.value --output tsv) >> $GITHUB_ENV
+
+    - name: 'Upload `alertlists-channels.json` to Azure Blob storage'
+      uses: Azure/CLI@v1
+      with:
+        inlineScript: |
+          #!/bin/bash
+          echo "Uploading scripts/alertlists-channels.json to Azure Blob storage account: ${{ env.STORAGE_ACCOUNT_NAME }}}} and container: ${{ env.STORAGE_CONTAINER_NAME }}"
+          az storage blob upload --account-name ${{ env.STORAGE_ACCOUNT_NAME }} --container-name ${{ env.STORAGE_CONTAINER_NAME }} --file ./scripts/alertlists-channels.json --name alertlists-channels.json --overwrite
+          echo "Uploaded alertlists-channels.json to Azure Blob storage"
+    
+    - name: 'Run Azure Functions Action'
+      uses: Azure/functions-action@v1
+      id: deployFuncApp
+      with:
+        app-name: ${{ env.FUNCTION_NAME }}
+        package: ./artifacts
+
+    - name: 'Smoke Test'
+      uses: Azure/CLI@v1
+      with:
+        inlineScript: |
+          #!/bin/bash
+          echo "Running smoke test"
+          curl -s -X POST -H "Content-Type: application/json" -d '{"url":"https://www.myapi.com/test"}' ${{ env.FUNCTION_URL }} | jq -r '.results[0].plate' 
+
