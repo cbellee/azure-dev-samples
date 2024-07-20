@@ -6,9 +6,9 @@ A demonstration of how to secure access to API Management APIs using OAuth & Ope
 
 - Azure Subscription
 - PowerShell 7.2+
-- PowerShell Az module 9.5.0+
-- PowerShell Microsoft.Graph module 2.19.0+
-- Azure CLI
+- [PowerShell Az module 9.5.0+](https://learn.microsoft.com/en-us/powershell/azure/install-azure-powershell?view=azps-12.1.0)
+- [PowerShell Microsoft.Graph module 2.19.0+](https://learn.microsoft.com/en-us/powershell/microsoftgraph/installation?view=graph-powershell-1.0)
+- [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli)
 
 ## Resources
 

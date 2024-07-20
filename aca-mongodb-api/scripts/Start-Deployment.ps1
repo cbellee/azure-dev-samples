@@ -135,6 +135,15 @@ $apis | ForEach-Object {
   $serviceUrl = "https://$($_.name).$appUri"
   $basePath = $PWD.Path
 
+  az apim api import `
+    --resource-group $resourceGroupName `
+    --service-name $apimName `
+    --protocol Https `
+    --service-url $serviceUrl `
+    --path $($_.name) `
+    --specification-path $_.apiDefinitionPath `
+    --specification-format OpenAPI
+
   Import-AzApiManagementApi `
     -SpecificationFormat OpenApi `
     -Context $apimContext `
