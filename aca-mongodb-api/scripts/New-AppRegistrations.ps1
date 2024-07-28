@@ -7,6 +7,7 @@ param (
     $TenantId
 )
 
+$InformationPreference = 'Continue'  
 $ErrorActionPreference = 'Stop'
 
 if ($null -eq (Get-Module -ListAvailable -Name Microsoft.Graph)) {
@@ -66,15 +67,17 @@ $appRoles = @(
     }
 )
 
-Write-Information "Creating server application '$ServerAppName' with app roles"
-if (!$($serverApp = Get-MgApplication -Filter "displayName eq '$ServerAppName'")) {
+$serverApp = Get-MgApplication -Filter "displayName eq '$ServerAppName'"
+if (!$serverApp) {
+    Write-Information "Creating server application '$ServerAppName' with app roles"
     $serverApp = New-MgApplication -AppRoles $appRoles -DisplayName $ServerAppName
+    Write-Information "Waiting for server application '$ServerAppName' to be created"
+    Start-Sleep -s 10
 }
 
-Write-Information "Waiting for server application '$ServerAppName' to be created"
-Start-Sleep -s 10
-
-if (!$($serverPrincipal = Get-MgServicePrincipal -Filter "appId eq '$($serverApp.AppId)'")) {
+$serverPrincipal = Get-MgServicePrincipal -Filter "appId eq '$($serverApp.AppId)'"
+if (!$serverPrincipal) {
+    Write-Information "Creating server principal '$ServerAppName' with app roles"
     $serverPrincipal = New-MgServicePrincipal -AppId $serverApp.AppId
 }
 
@@ -96,19 +99,18 @@ $requiredResourceAccess = @(
     }
 )
 
-Write-Information "Creating client application '$ClientAppName' with resource access for '$ServerAppName'"
-
-if (!$($clientApp = Get-MgApplication -Filter "displayName eq '$clientAppName'")) {
+$clientApp = Get-MgApplication -Filter "displayName eq '$clientAppName'"
+if (!$clientApp) {
+    Write-Information "Creating client application '$ClientAppName' with resource access for '$ServerAppName'"
     $clientApp = New-MgApplication  `
         -DisplayName $clientAppName `
         -PasswordCredentials $passwordCreds `
         -RequiredResourceAccess $requiredResourceAccess
 }
 
-Write-Information "Waiting for client application '$ClientAppName' to be created"
-Start-Sleep -s 10
-
-if (!$($clientPrincipal = Get-MgServicePrincipal -Filter "appId eq '$($clientApp.AppId)'")) {
+$clientPrincipal = Get-MgServicePrincipal -Filter "appId eq '$($clientApp.AppId)'"
+if (!$clientPrincipal) {
+    Write-Information "Waiting for client principal '$ClientPrincipal' to be created"
     $clientPrincipal = New-MgServicePrincipal -AppId $clientApp.AppId
 }
 
@@ -136,5 +138,5 @@ $roles | ForEach-Object {
 # write appIds & url to get client credential token to .env file
 "SERVER_APP_ID=$($serverApp.AppId)" | Out-File ../.env -Encoding utf8
 "CLIENT_APP_ID=$($clientApp.Id)" | Out-File ../.env -Encoding utf8 -Append
-"CLIENT_APP_SECRET=$clientApp.PasswordCredentials.SecretText"
+"CLIENT_APP_SECRET=$($clientApp.PasswordCredentials.SecretText)"  | Out-File ../.env -Encoding utf8 -Append
 "TOKEN_URL='client_id=$($clientApp.AppId)&client_secret=$($clientApp.PasswordCredentials.SecretText)&scope=$($serverApp.AppId)%2F.default&grant_type=client_credentials'" | Out-File ../.env -Encoding utf8 -Append

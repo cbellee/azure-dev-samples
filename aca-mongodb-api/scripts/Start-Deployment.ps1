@@ -1,9 +1,14 @@
 # create infrastructure
-$resourceGroupName = "apim-demo-rg"
+$resourceGroupName = "apim-oauth-demo-rg"
 $location = 'australiaeast'
 $emailAddress = $(az ad signed-in-user show --query userPrincipalName -o tsv)
-$tenantId = az account show --query tenantId -o tsv
+$tenantId = az account show --query tenantId --output tsv
+$subscriptionId = az account show --query id --output tsv
 $version = '0.0.1'
+
+$ErrorActionPreference = 'Stop'
+
+Connect-AzAccount -Subscription $subscriptionId -Tenant $tenantId
 
 # ensure Az module 9.5.0 or greater is installed
 if (-not $(Get-InstalledModule -Name az -MinimumVersion 9.5.0 -ErrorAction Stop)) {
@@ -65,7 +70,7 @@ az group create --name $resourceGroupName --location $location
 az deployment group create `
   --name 'acr-deployment' `
   --resource-group $resourceGroupName `
-  --template-file ./infra/modules/acr.bicep `
+  --template-file ../infra/modules/acr.bicep `
   --parameters location=$location `
   --parameters sku='Basic'
 
@@ -76,12 +81,13 @@ $bookingImageName = "$acrName.azurecr.io/booking:$version"
 
 # build images in ACR concurrently
 az acr login -n $acrName
-az acr build -t $customerImageName -r $acrName --build-arg BUILD_TARGET=customer --build-arg PORT=8081 ./api &
-az acr build -t $flightImageName -r $acrName --build-arg BUILD_TARGET=flight --build-arg PORT=8082 ./api &
-az acr build -t $bookingImageName -r $acrName --build-arg BUILD_TARGET=booking --build-arg PORT=8083 ./api &
+
+az acr build -t $customerImageName -r $acrName --build-arg BUILD_TARGET=customer --build-arg PORT=8081 ../api &
+az acr build -t $flightImageName -r $acrName --build-arg BUILD_TARGET=flight --build-arg PORT=8082 ../api &
+az acr build -t $bookingImageName -r $acrName --build-arg BUILD_TARGET=booking --build-arg PORT=8083 ../api &
 
 # wait for jobs to complete
-Get-Job | Wait-Job
+Get-Job | Wait-Job | Remove-Job
 
 $apis = @(
   [PSCustomObject]@{
@@ -114,7 +120,7 @@ $jsonParam = $($apis | ConvertTo-Json -Depth 10 -Compress).Replace('"', '\"')
 az deployment group create `
   --name 'infra-deployment' `
   --resource-group $resourceGroupName `
-  --template-file ./infra/main.bicep `
+  --template-file ../infra/main.bicep `
   --parameters location=$location `
   --parameters acrName=$acrName `
   --parameters emailAddress=$emailAddress `
@@ -135,16 +141,18 @@ $apis | ForEach-Object {
   $serviceUrl = "https://$($_.name).$appUri"
   $basePath = $PWD.Path
 
-  az apim api import `
+  <# az apim api import `
     --resource-group $resourceGroupName `
     --service-name $apimName `
-    --protocol Https `
-    --service-url $serviceUrl `
-    --path $($_.name) `
     --specification-path $_.apiDefinitionPath `
-    --specification-format OpenAPI
-
-  Import-AzApiManagementApi `
+    --protocol https `
+    --service-url $serviceUrl `
+    --api-type http `
+    --path $($_.name) `
+    --specification-format OpenApi
+ #>
+ 
+ Import-AzApiManagementApi `
     -SpecificationFormat OpenApi `
     -Context $apimContext `
     -SpecificationPath $_.apiDefinitionPath `
