@@ -14,7 +14,7 @@ if ($null -eq (Get-Module -ListAvailable -Name Microsoft.Graph)) {
     Install-Module -Name Microsoft.Graph
 }
 
-Connect-MgGraph -Scopes "Application.ReadWrite.All", "AppRoleAssignment.ReadWrite.All" -TenantId $tenantId -NoWelcome
+Connect-MgGraph -Scopes "Application.ReadWrite.All", "AppRoleAssignment.ReadWrite.All" -TenantId $TenantId -NoWelcome
 
 $appRoles = @(
     @{
@@ -79,6 +79,8 @@ $serverPrincipal = Get-MgServicePrincipal -Filter "appId eq '$($serverApp.AppId)
 if (!$serverPrincipal) {
     Write-Information "Creating server principal '$ServerAppName' with app roles"
     $serverPrincipal = New-MgServicePrincipal -AppId $serverApp.AppId
+    Write-Information "Waiting for server principal '$ServerAppName' to be created"
+    Start-Sleep -s 10
 }
 
 $passwordCreds = @{
@@ -106,15 +108,17 @@ if (!$clientApp) {
         -DisplayName $clientAppName `
         -PasswordCredentials $passwordCreds `
         -RequiredResourceAccess $requiredResourceAccess
+    Write-Information "Waiting for client application '$clientApp' to be created"
+    Start-Sleep -s 10
 }
 
 $clientPrincipal = Get-MgServicePrincipal -Filter "appId eq '$($clientApp.AppId)'"
 if (!$clientPrincipal) {
-    Write-Information "Waiting for client principal '$ClientPrincipal' to be created"
+    Write-Information "Creating client principal '$clientPrincipal'"
     $clientPrincipal = New-MgServicePrincipal -AppId $clientApp.AppId
+    Write-Information "Waiting for client proncipal '$clientPrincipal' to be created"
+    Start-Sleep -s 10
 }
-
-# az ad app permission admin-consent --id $clientApp.AppId
 
 $roles = Get-MgServicePrincipal -Filter "displayName eq '$ServerAppName'" -Property AppRoles | Select-Object -ExpandProperty appRoles
 

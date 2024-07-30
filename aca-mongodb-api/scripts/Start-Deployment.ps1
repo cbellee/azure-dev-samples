@@ -8,7 +8,7 @@ $version = '0.0.1'
 
 $ErrorActionPreference = 'Stop'
 
-Connect-AzAccount -Subscription $subscriptionId -Tenant $tenantId
+#Connect-AzAccount -Subscription $subscriptionId -Tenant $tenantId
 
 # ensure Az module 9.5.0 or greater is installed
 if (-not $(Get-InstalledModule -Name az -MinimumVersion 9.5.0 -ErrorAction Stop)) {
