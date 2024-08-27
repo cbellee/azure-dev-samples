@@ -1,0 +1,18 @@
+{
+    "functionConnections": {
+        "azureFunctionOperation": {
+            "authentication": {
+                "name": "Code",
+                "type": "QueryString",
+                "value": "@appsetting('azureFunctionOperation_functionAppKey')"
+            },
+            "displayName": "func-cxn-1",
+            "function": {
+                "id": "/subscriptions/@{appsetting('workflow_subscription_id')}/resourceGroups/@{appsetting('workflow_rg_name')}/providers/Microsoft.Web/sites/@{appsetting('func_app_name')}/functions/Function_HttpStart"
+            },
+            "triggerUrl": "https://@{appsetting('func_app_name')}.azurewebsites.net/api/function_httpstart"
+        }
+    },
+    "managedApiConnections": {},
+    "serviceProviderConnections": {}
+}

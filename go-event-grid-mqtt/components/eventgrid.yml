@@ -1,0 +1,37 @@
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: <name>
+spec:
+  type: bindings.azure.eventgrid
+  version: v1
+  scopes:
+    - subscriberapp
+  metadata:
+  # Required Output Binding Metadata
+  #- name: accessKey
+  #  value: "NCBeKiDMUaJi4lOMUOlmPn+fmGIttuGjgAZEGGb73i0="
+  #- name: topicEndpoint
+  #  value: "[TopicEndpoint]"
+  # Required Input Binding Metadata
+  - name: azureTenantId
+    value: "2f4a9838-26b7-47ee-be60-ccc1fdec5953"
+  - name: azureSubscriptionId
+    value: "b2375b5f-8dab-4436-b87c-32bc7fdce5d0"
+  - name: azureClientId
+    value: "[ClientId]"
+  #- name: azureClientSecret
+  #  value: ""
+  - name: subscriberEndpoint
+    value: "[SubscriberEndpoint]"
+  - name: handshakePort
+    # Make sure to pass this as a string, with quotes around the value
+    value: "9000"
+  - name: scope
+    value: "/subscriptions/b2375b5f-8dab-4436-b87c-32bc7fdce5d0/resourceGroups/go-event-grid-mqqt-rg/providers/Microsoft.EventGrid/topics/device-telemetry"
+  # Optional Input Binding Metadata
+  - name: eventSubscriptionName
+    value: "[EventSubscriptionName]"
+  # Optional metadata
+  - name: direction
+    value: "input" # input, output

@@ -1,0 +1,125 @@
+[
+    {
+        "environment": "dev",
+        "variables" : [
+            {
+                "name": "TENANT_ID",
+                "value": "3d49be6f-6e38-404b-bbd4-f61c1a2d25bf"
+            },
+            {
+                "name": "SUBSCRIPTION_ID",
+                "value": "b2375b5f-8dab-4436-b87c-32bc7fdce5d0"
+            },
+            {
+                "name": "CLIENT_ID",
+                "value": "50e23aa9-34cc-44d1-ad39-f7368fb8cf25"
+            },
+            {
+                "name": "ENVIRONMENT",
+                "value": "dev"
+            },
+            {
+                "name": "LOCATION",
+                "value": "australiaeast"
+            },
+            {
+                "name": "APP",
+                "value": "gh-action-demo-function"
+            },
+            {
+                "name": "RESOURCE_GROUP",
+                "value": "gh-action-demo-function-dev-rg"
+            },
+            {
+                "name": "API_KEY",
+                "value": "sdlkgnselknwek&7aehfkwrg"
+            },
+            {
+                "name": "API_URL",
+                "value": "https://dev.myapi.com.au/api/"
+            }
+        ]
+    },
+    {
+        "environment": "test",
+        "variables" : [
+            {
+                "name": "TENANT_ID",
+                "value": "3d49be6f-6e38-404b-bbd4-f61c1a2d25bf"
+            },
+            {
+                "name": "SUBSCRIPTION_ID",
+                "value": "b2375b5f-8dab-4436-b87c-32bc7fdce5d0"
+            },
+            {
+                "name": "CLIENT_ID",
+                "value": "55d3dea3-4e62-467e-8637-cfa402082f4b"
+            },
+            {
+                "name": "ENVIRONMENT",
+                "value": "test"
+            },
+            {
+                "name": "LOCATION",
+                "value": "australiaeast"
+            },
+            {
+                "name": "APP",
+                "value": "gh-action-demo-function"
+            },
+            {
+                "name": "RESOURCE_GROUP",
+                "value": "gh-action-demo-function-test-rg"
+            },
+            {
+                "name": "API_KEY",
+                "value": "sdlkgnselknwek&7aehfkwrg"
+            },
+            {
+                "name": "API_URL",
+                "value": "https://test.myapi.com.au/api/"
+            }
+        ]
+    },
+    {
+        "environment": "prod",
+        "variables" : [
+            {
+                "name": "TENANT_ID",
+                "value": "3d49be6f-6e38-404b-bbd4-f61c1a2d25bf"
+            },
+            {
+                "name": "SUBSCRIPTION_ID",
+                "value": "b2375b5f-8dab-4436-b87c-32bc7fdce5d0"
+            },
+            {
+                "name": "CLIENT_ID",
+                "value": "c26f9b9e-48e5-4550-869f-702b983d6864"
+            },
+            {
+                "name": "ENVIRONMENT",
+                "value": "prod"
+            },
+            {
+                "name": "LOCATION",
+                "value": "australiaeast"
+            },
+            {
+                "name": "APP",
+                "value": "gh-action-demo-function"
+            },
+            {
+                "name": "RESOURCE_GROUP",
+                "value": "gh-action-demo-function-prod-rg"
+            },
+            {
+                "name": "API_KEY",
+                "value": "sdlkgnselknwek&7aehfkwrg"
+            },
+            {
+                "name": "API_URL",
+                "value": "https://prod.myapi.com.au/api/"
+            }
+        ]
+    }
+]

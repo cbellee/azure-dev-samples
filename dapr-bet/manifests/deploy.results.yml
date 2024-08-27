@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: results
+  labels:
+    app: results
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: results
+  template:
+    metadata:
+      labels:
+        app: results
+      annotations:
+        dapr.io/enabled: "true"
+        dapr.io/app-id: "results"
+        dapr.io/app-port: "8003"
+        dapr.io/log-level: "debug"
+        dapr.io/profiling: "true"
+        dapr.io/enable-api-logging: "true"
+    spec:
+      dnsPolicy: ClusterFirst
+      containers:
+        - name: results
+          image: <IMAGE_NAME>
+          ports:
+            - containerPort: 8003
+          imagePullPolicy: Always
+          env:
+            - name: COSMOS_DB_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: cosmos-secrets
+                  key: cosmos-db-master-key
+            - name: COSMOS_DB_URL
+              valueFrom:
+                secretKeyRef:
+                  name: cosmos-secrets
+                  key: cosmos-db-url
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 250m
+              memory: 256Mi

@@ -1,0 +1,51 @@
+services:
+  customer:
+    build:
+      dockerfile: ./app/Dockerfile
+      args:
+        - BUILD_TARGET=customer
+        - PORT=8081
+    ports:
+      - 8081:8081
+    environment:
+      - MONGO_DB_CXN=${MONGO_DB_CXN}
+      - MONGO_DB_NAME=flightDb
+      - MONGO_DB_COLLECTION=customers
+      - PORT=8081
+    networks:
+      - backend
+
+  flight:
+    build:
+      dockerfile: ./app/Dockerfile
+      args:
+        - BUILD_TARGET=flight
+        - PORT=8082
+    ports:
+      - 8082:8082
+    environment:
+      - MONGO_DB_CXN=${MONGO_DB_CXN}
+      - MONGO_DB_NAME=flightDb
+      - MONGO_DB_COLLECTION=flights
+      - PORT=8082
+    networks:
+      - backend
+
+  booking:
+    build:
+      dockerfile: ./app/Dockerfile
+      args:
+        - BUILD_TARGET=booking
+        - PORT=8083
+    ports:
+      - 8083:8083
+    environment:
+      - MONGO_DB_CXN=${MONGO_DB_CXN}
+      - MONGO_DB_NAME=flightDb
+      - MONGO_DB_COLLECTION=bookings
+      - PORT=8083
+    networks:
+      - backend
+
+networks:
+  backend:
